@@ -175,5 +175,6 @@ const ICON_OPTIONS = [
 ---
 
 ## License
+## [explore this component on 21st.dev community] (https://21st.dev/aryankumar06/aryan/default)
 
 MIT
