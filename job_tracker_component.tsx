@@ -353,7 +353,19 @@ export const Component = () => {
               accept=".pdf,.doc,.docx"
               onChange={(e) => {
                 const f = e.target.files?.[0];
-                if (f) setResumeFile(f.name);
+                if (f) {
+                  const allowedExtensions = [".pdf", ".doc", ".docx"];
+                  const fileName = f.name;
+                  const lastDotIndex = fileName.lastIndexOf(".");
+                  const fileExtension = lastDotIndex !== -1 ? fileName.substring(lastDotIndex).toLowerCase() : "";
+
+                  if (allowedExtensions.includes(fileExtension)) {
+                    setResumeFile(fileName);
+                  } else {
+                    alert("Invalid file type. Please upload a .pdf, .doc, or .docx file.");
+                    e.target.value = "";
+                  }
+                }
               }}
             />
           </label>
