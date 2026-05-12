@@ -93,7 +93,7 @@ const Modal = ({ title, onClose, dark, children }) => {
       <div className={cn("w-full max-w-md rounded-xl border shadow-2xl", modal)}>
         <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: divCol }}>
           <h2 className={cn("font-semibold text-base", titleCls)}>{title}</h2>
-          <button onClick={onClose} className={cn("p-1.5 rounded-md transition-colors", closeCls)}>
+          <button onClick={onClose} className={cn("p-1.5 rounded-md transition-colors", closeCls)} aria-label="Close modal">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -318,13 +318,13 @@ export const Component = () => {
                   {filterConfig && (
                     <div className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-medium", t.pill)}>
                       <Filter className="w-3 h-3" />Filtered
-                      <button onClick={() => setFilterConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100"><X className="w-3 h-3" /></button>
+                      <button onClick={() => setFilterConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100" aria-label="Clear filter"><X className="w-3 h-3" /></button>
                     </div>
                   )}
                   {sortConfig && (
                     <div className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-medium", t.pill)}>
                       <ArrowUpDown className="w-3 h-3" />Sorted
-                      <button onClick={() => setSortConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100"><X className="w-3 h-3" /></button>
+                      <button onClick={() => setSortConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100" aria-label="Clear sort"><X className="w-3 h-3" /></button>
                     </div>
                   )}
                 </div>
@@ -374,7 +374,8 @@ export const Component = () => {
 
                 {/* Zap: toggle all */}
                 <button onClick={handleToggleAll} title="Toggle all habits"
-                  className={cn("p-2 rounded-md transition-colors", t.iconBtn, t.subtext)}>
+                  className={cn("p-2 rounded-md transition-colors", t.iconBtn, t.subtext)}
+                  aria-label="Toggle all habits">
                   <Zap className="w-4 h-4" />
                 </button>
 
