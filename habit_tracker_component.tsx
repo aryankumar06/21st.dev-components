@@ -1,5 +1,5 @@
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import {
   Filter, ArrowUpDown, Zap, Search, Settings, ChevronDown,
   Dumbbell, Brain, Moon, PenLine, BookOpen, Plus, MoreHorizontal,
@@ -148,13 +148,13 @@ export const Component = () => {
   const toggleHabit = (dayIndex, key) =>
     setHabits((prev) => prev.map((row, i) => i !== dayIndex ? row : { ...row, [key]: !row[key] }));
 
-  const visibleCols = columns.filter((c) => c.visible);
+  const visibleCols = useMemo(() => columns.filter((c) => c.visible), [columns]);
   const getColumnTotal = (key) => habits.filter((r) => r[key]).length;
   const getTotalChecked = () => habits.reduce((t, r) => t + visibleCols.reduce((s, c) => s + (r[c.key] ? 1 : 0), 0), 0);
   const totalPossible = habits.length * visibleCols.length;
   const pct = totalPossible === 0 ? 0 : Math.round((getTotalChecked() / totalPossible) * 100);
 
-  const displayedHabits = (() => {
+  const displayedHabits = useMemo(() => {
     let rows = [...habits];
     if (searchQuery.trim()) rows = rows.filter((r) => r.day.toLowerCase().includes(searchQuery.toLowerCase()));
     if (filterConfig) rows = rows.filter((r) => r[filterConfig.key]);
@@ -170,7 +170,7 @@ export const Component = () => {
       });
     }
     return rows;
-  })();
+  }, [habits, searchQuery, filterConfig, sortConfig, visibleCols]);
 
   const handleAddColumn = () => {
     if (!newColLabel.trim()) return;
