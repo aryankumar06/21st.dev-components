@@ -93,7 +93,7 @@ const Modal = ({ title, onClose, dark, children }) => {
       <div className={cn("w-full max-w-md rounded-xl border shadow-2xl", modal)}>
         <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: divCol }}>
           <h2 className={cn("font-semibold text-base", titleCls)}>{title}</h2>
-          <button onClick={onClose} className={cn("p-1.5 rounded-md transition-colors", closeCls)}>
+          <button onClick={onClose} aria-label="Close" title="Close" className={cn("p-1.5 rounded-md transition-colors", closeCls)}>
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -334,6 +334,7 @@ export const Component = () => {
                 {/* Filter */}
                 <div className="relative" ref={filterRef}>
                   <button onClick={() => { setShowFilterMenu(!showFilterMenu); setShowSortMenu(false); }}
+                    aria-label="Filter" title="Filter"
                     className={cn("p-2 rounded-md transition-colors", t.iconBtn, filterConfig ? t.pill : t.subtext)}>
                     <Filter className="w-4 h-4" />
                   </button>
@@ -354,6 +355,7 @@ export const Component = () => {
                 {/* Sort */}
                 <div className="relative" ref={sortRef}>
                   <button onClick={() => { setShowSortMenu(!showSortMenu); setShowFilterMenu(false); }}
+                    aria-label="Sort" title="Sort"
                     className={cn("p-2 rounded-md transition-colors", t.iconBtn, sortConfig ? t.pill : t.subtext)}>
                     <ArrowUpDown className="w-4 h-4" />
                   </button>
@@ -373,19 +375,21 @@ export const Component = () => {
                 </div>
 
                 {/* Zap: toggle all */}
-                <button onClick={handleToggleAll} title="Toggle all habits"
+                <button onClick={handleToggleAll} aria-label="Toggle all habits" title="Toggle all habits"
                   className={cn("p-2 rounded-md transition-colors", t.iconBtn, t.subtext)}>
                   <Zap className="w-4 h-4" />
                 </button>
 
                 {/* Search */}
                 <button onClick={() => { setShowSearch(!showSearch); if (showSearch) setSearchQuery(""); }}
+                  aria-label="Search" title="Search"
                   className={cn("p-2 rounded-md transition-colors", t.iconBtn, showSearch ? t.pill : t.subtext)}>
                   <Search className="w-4 h-4" />
                 </button>
 
                 {/* Settings */}
                 <button onClick={() => setShowSettingsModal(true)}
+                  aria-label="Settings" title="Settings"
                   className={cn("p-2 rounded-md transition-colors", t.iconBtn, t.subtext)}>
                   <Settings className="w-4 h-4" />
                 </button>
@@ -437,6 +441,7 @@ export const Component = () => {
                         <col.icon className="w-3.5 h-3.5 flex-shrink-0" />
                         <span className="whitespace-nowrap">{col.label}</span>
                         <button
+                          aria-label={`Column menu for ${col.label}`} title={`Column menu for ${col.label}`}
                           onClick={(e) => { e.stopPropagation(); setColMenuKey(colMenuKey === col.key ? null : col.key); }}
                           className={cn("ml-1 opacity-0 group-hover:opacity-100 p-0.5 rounded transition-all", t.iconBtn)}
                         >
@@ -459,7 +464,7 @@ export const Component = () => {
                     </th>
                   ))}
                   <th className={cn("px-4 py-3 text-center border-r w-12", t.subtext, t.cellBorder)}>
-                    <button onClick={() => setShowAddColumnModal(true)} title="Add column"
+                    <button onClick={() => setShowAddColumnModal(true)} aria-label="Add column" title="Add column"
                       className={cn("p-1 rounded transition-colors mx-auto block", t.iconBtn)}>
                       <Plus className="w-3.5 h-3.5" />
                     </button>
@@ -487,7 +492,7 @@ export const Component = () => {
                       ))}
                       {/* Check-all cell */}
                       <td className={cn("px-4 py-3.5 border-r text-center", t.cellBorder)}>
-                        <button onClick={() => handleCheckAllForDay(row.day)} title="Check all for this day"
+                        <button onClick={() => handleCheckAllForDay(row.day)} aria-label="Check all for this day" title="Check all for this day"
                           className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}>
                           <Check className="w-3.5 h-3.5" />
                         </button>
@@ -496,6 +501,7 @@ export const Component = () => {
                       <td className="px-4 py-3.5 text-center relative">
                         <div className="relative inline-block">
                           <button
+                            aria-label={`Row menu for ${row.day}`} title={`Row menu for ${row.day}`}
                             onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
                             className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}
                           >
@@ -578,6 +584,7 @@ export const Component = () => {
                   ))}
                   <div className="w-8 flex justify-center relative">
                     <button
+                      aria-label={`Row menu for ${row.day}`} title={`Row menu for ${row.day}`}
                       onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
                       className={cn("p-1 rounded transition-colors", t.iconBtn, t.muted)}
                     >
@@ -697,13 +704,13 @@ export const Component = () => {
                       <span className={cn("text-sm", col.visible ? t.text : t.muted)}>{col.label}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <button onClick={() => handleToggleColumnVis(col.key)} title={col.visible ? "Hide" : "Show"}
+                      <button onClick={() => handleToggleColumnVis(col.key)} aria-label={col.visible ? `Hide ${col.label} column` : `Show ${col.label} column`} title={col.visible ? "Hide" : "Show"}
                         className={cn("p-1.5 rounded transition-colors", t.iconBtn)}>
                         {col.visible
                           ? <Eye className={cn("w-3.5 h-3.5", t.subtext)} />
                           : <EyeOff className={cn("w-3.5 h-3.5", t.muted)} />}
                       </button>
-                      <button onClick={() => handleDeleteColumn(col.key)}
+                      <button onClick={() => handleDeleteColumn(col.key)} aria-label={`Delete ${col.label} column`} title={`Delete ${col.label} column`}
                         className={cn("p-1.5 rounded transition-colors", dark ? "hover:bg-red-900/20 text-red-400" : "hover:bg-red-50 text-red-500")}>
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
