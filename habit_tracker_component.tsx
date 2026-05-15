@@ -93,7 +93,7 @@ const Modal = ({ title, onClose, dark, children }) => {
       <div className={cn("w-full max-w-md rounded-xl border shadow-2xl", modal)}>
         <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: divCol }}>
           <h2 className={cn("font-semibold text-base", titleCls)}>{title}</h2>
-          <button onClick={onClose} className={cn("p-1.5 rounded-md transition-colors", closeCls)}>
+          <button onClick={onClose} className={cn("p-1.5 rounded-md transition-colors", closeCls)} aria-label="Close modal" title="Close modal">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -318,13 +318,13 @@ export const Component = () => {
                   {filterConfig && (
                     <div className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-medium", t.pill)}>
                       <Filter className="w-3 h-3" />Filtered
-                      <button onClick={() => setFilterConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100"><X className="w-3 h-3" /></button>
+                      <button onClick={() => setFilterConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100" aria-label="Clear filter" title="Clear filter"><X className="w-3 h-3" /></button>
                     </div>
                   )}
                   {sortConfig && (
                     <div className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-medium", t.pill)}>
                       <ArrowUpDown className="w-3 h-3" />Sorted
-                      <button onClick={() => setSortConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100"><X className="w-3 h-3" /></button>
+                      <button onClick={() => setSortConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100" aria-label="Clear sort" title="Clear sort"><X className="w-3 h-3" /></button>
                     </div>
                   )}
                 </div>
@@ -334,7 +334,7 @@ export const Component = () => {
                 {/* Filter */}
                 <div className="relative" ref={filterRef}>
                   <button onClick={() => { setShowFilterMenu(!showFilterMenu); setShowSortMenu(false); }}
-                    className={cn("p-2 rounded-md transition-colors", t.iconBtn, filterConfig ? t.pill : t.subtext)}>
+                    className={cn("p-2 rounded-md transition-colors", t.iconBtn, filterConfig ? t.pill : t.subtext)} aria-label="Filter" title="Filter">
                     <Filter className="w-4 h-4" />
                   </button>
                   {showFilterMenu && (
@@ -354,7 +354,7 @@ export const Component = () => {
                 {/* Sort */}
                 <div className="relative" ref={sortRef}>
                   <button onClick={() => { setShowSortMenu(!showSortMenu); setShowFilterMenu(false); }}
-                    className={cn("p-2 rounded-md transition-colors", t.iconBtn, sortConfig ? t.pill : t.subtext)}>
+                    className={cn("p-2 rounded-md transition-colors", t.iconBtn, sortConfig ? t.pill : t.subtext)} aria-label="Sort" title="Sort">
                     <ArrowUpDown className="w-4 h-4" />
                   </button>
                   {showSortMenu && (
@@ -380,13 +380,13 @@ export const Component = () => {
 
                 {/* Search */}
                 <button onClick={() => { setShowSearch(!showSearch); if (showSearch) setSearchQuery(""); }}
-                  className={cn("p-2 rounded-md transition-colors", t.iconBtn, showSearch ? t.pill : t.subtext)}>
+                  className={cn("p-2 rounded-md transition-colors", t.iconBtn, showSearch ? t.pill : t.subtext)} aria-label="Search" title="Search">
                   <Search className="w-4 h-4" />
                 </button>
 
                 {/* Settings */}
                 <button onClick={() => setShowSettingsModal(true)}
-                  className={cn("p-2 rounded-md transition-colors", t.iconBtn, t.subtext)}>
+                  className={cn("p-2 rounded-md transition-colors", t.iconBtn, t.subtext)} aria-label="Settings" title="Settings">
                   <Settings className="w-4 h-4" />
                 </button>
 
@@ -439,6 +439,8 @@ export const Component = () => {
                         <button
                           onClick={(e) => { e.stopPropagation(); setColMenuKey(colMenuKey === col.key ? null : col.key); }}
                           className={cn("ml-1 opacity-0 group-hover:opacity-100 p-0.5 rounded transition-all", t.iconBtn)}
+                          aria-label="Column menu"
+                          title="Column menu"
                         >
                           <ChevronDown className="w-3 h-3" />
                         </button>
@@ -498,6 +500,8 @@ export const Component = () => {
                           <button
                             onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
                             className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}
+                            aria-label="Row menu"
+                            title="Row menu"
                           >
                             <MoreHorizontal className="w-3.5 h-3.5" />
                           </button>
@@ -704,7 +708,7 @@ export const Component = () => {
                           : <EyeOff className={cn("w-3.5 h-3.5", t.muted)} />}
                       </button>
                       <button onClick={() => handleDeleteColumn(col.key)}
-                        className={cn("p-1.5 rounded transition-colors", dark ? "hover:bg-red-900/20 text-red-400" : "hover:bg-red-50 text-red-500")}>
+                        className={cn("p-1.5 rounded transition-colors", dark ? "hover:bg-red-900/20 text-red-400" : "hover:bg-red-50 text-red-500")} aria-label="Delete column" title="Delete column">
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>

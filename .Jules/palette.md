@@ -1,0 +1,3 @@
+## 2024-05-15 - Missing Accessible Labels on Icon-Only Actions
+**Learning:** Discovered a consistent pattern across multiple components (`job_tracker_component.tsx`, `habit_tracker_component.tsx`) where icon-only buttons used for secondary actions (closing modals, clearing filters, opening dropdowns) lacked `aria-label` and `title` attributes. This makes these common actions invisible to screen readers and difficult to discover for sighted users needing tooltips.
+**Action:** Always ensure that icon-only interactive elements receive both an `aria-label` for screen readers and a `title` attribute for tooltips as part of the standard component implementation checklist, especially for clear/close/filter controls.
