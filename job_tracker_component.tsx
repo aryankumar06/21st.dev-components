@@ -295,6 +295,8 @@ export const Component = () => {
 
         {/* Theme toggle */}
         <button
+          aria-label="Toggle theme"
+          title="Toggle theme"
           onClick={toggleTheme}
           style={{
             position: "absolute", top: 0, right: 0,
@@ -339,6 +341,8 @@ export const Component = () => {
               ? <span style={{ color: t.text, display: "flex", alignItems: "center", gap: 8 }}>
                   <span>📄</span> {resumeFile}
                   <button
+                    aria-label="Remove resume file"
+                    title="Remove resume file"
                     onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
                   >
@@ -406,6 +410,7 @@ export const Component = () => {
               <div style={{ position: "relative" }} ref={filterMenuRef}>
                 <button
                   title="Filter by stage"
+                  aria-label="Filter by stage"
                   onClick={() => setShowFilterMenu((v) => !v)}
                   style={iconBtn(filterStage !== "all" || showFilterMenu)}
                 >
@@ -450,6 +455,7 @@ export const Component = () => {
               <div style={{ position: "relative" }} ref={sortMenuRef}>
                 <button
                   title="Sort"
+                  aria-label="Sort"
                   onClick={() => setShowSortMenu((v) => !v)}
                   style={iconBtn(sortField !== "none" || showSortMenu)}
                 >
@@ -507,6 +513,7 @@ export const Component = () => {
               {/* Search */}
               <button
                 title="Search"
+                aria-label="Search"
                 onClick={() => { setShowSearch((v) => !v); setTimeout(() => searchRef.current?.focus(), 50); }}
                 style={iconBtn(showSearch)}
               >
@@ -518,6 +525,7 @@ export const Component = () => {
               {/* Expand */}
               <button
                 title={isExpanded ? "Collapse" : "Expand"}
+                aria-label={isExpanded ? "Collapse" : "Expand"}
                 onClick={() => setIsExpanded((v) => !v)}
                 style={iconBtn(isExpanded)}
               >
@@ -532,6 +540,7 @@ export const Component = () => {
               {/* Settings */}
               <button
                 title="Settings"
+                aria-label="Settings"
                 onClick={() => setShowSettings(true)}
                 style={iconBtn(showSettings)}
               >
@@ -555,6 +564,8 @@ export const Component = () => {
                     + New
                   </button>
                   <button
+                    aria-label="Toggle new application menu"
+                    title="Toggle new application menu"
                     onClick={() => setShowNewDropdown((v) => !v)}
                     style={{
                       background: "#3b82f6", color: "#fff", border: "none",
@@ -619,6 +630,8 @@ export const Component = () => {
               />
               {searchQuery && (
                 <button
+                  aria-label="Clear search"
+                  title="Clear search"
                   onClick={() => setSearchQuery("")}
                   style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: t.muted }}
                 >
@@ -638,7 +651,7 @@ export const Component = () => {
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
                   Stage: {STAGES.find((s) => s.key === filterStage)?.label}
-                  <button onClick={() => setFilterStage("all")} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
+                  <button aria-label="Clear filter" title="Clear filter" onClick={() => setFilterStage("all")} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
                 </span>
               )}
               {sortField !== "none" && (
@@ -648,7 +661,7 @@ export const Component = () => {
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
                   Sort: {sortField} {sortDir === "asc" ? "↑" : "↓"}
-                  <button onClick={clearSort} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
+                  <button aria-label="Clear sort" title="Clear sort" onClick={clearSort} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
                 </span>
               )}
             </div>
@@ -880,6 +893,8 @@ export const Component = () => {
                 </div>
                 <span style={{ flex: 1, textDecoration: item.done ? "line-through" : "none" }}>{item.text}</span>
                 <button
+                  aria-label="Delete action item"
+                  title="Delete action item"
                   onClick={() => deleteAction(item.id)}
                   style={{ background: "none", border: "none", cursor: "pointer", color: t.subtle, padding: 4, display: "flex", alignItems: "center", borderRadius: 4, transition: "color 0.15s" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#ef4444")}
@@ -933,7 +948,7 @@ export const Component = () => {
                   <div style={{ fontSize: 13, color: t.muted }}>{selectedApp.role}</div>
                 </div>
               </div>
-              <button onClick={() => setSelectedApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}>
+              <button aria-label="Close" title="Close" onClick={() => setSelectedApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}>
                 <XIcon />
               </button>
             </div>
@@ -1029,7 +1044,7 @@ export const Component = () => {
           <div style={{ padding: "20px 24px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
               <div style={{ fontWeight: 700, fontSize: 17 }}>Edit Application</div>
-              <button onClick={() => setEditApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
+              <button aria-label="Close" title="Close" onClick={() => setEditApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
             </div>
 
             <div style={{ marginBottom: 14 }}>
@@ -1109,7 +1124,7 @@ export const Component = () => {
           <div style={{ padding: "20px 24px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
               <div style={{ fontWeight: 700, fontSize: 17 }}>Settings</div>
-              <button onClick={() => setShowSettings(false)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
+              <button aria-label="Close" title="Close" onClick={() => setShowSettings(false)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
             </div>
 
             {[
