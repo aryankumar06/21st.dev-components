@@ -1,3 +1,6 @@
 ## 2024-05-24 - Accessibility and Tooltips on Icon-Only Buttons
 **Learning:** Icon-only buttons must explicitly declare both `aria-label` (for screen readers) and `title` (for visual tooltips). In Shadcn/Lucide setups, icons don't inherently communicate their action to either assistive technologies or sighted users needing clarification. Missing these attributes is a common accessibility trap in dense UIs like habit trackers.
 **Action:** Always add both `aria-label` and `title` attributes to icon-only buttons as a standard procedure to ensure an inclusive and intuitive user experience.
+## 2026-05-19 - Icon-Only Button Accessibility Pattern
+**Learning:** Across the components in this application (such as habit_tracker_component and job_tracker_component), there is a recurring pattern of icon-only action buttons (e.g., clear buttons, modal close, table menus) missing essential `aria-label` and `title` attributes. This makes them inaccessible to screen readers and difficult for all users to understand without tooltips.
+**Action:** Always verify that every icon-only button within tables, modals, and toolbars includes both an `aria-label` for screen readers and a `title` for visual tooltips, to ensure full accessibility and a better user experience.
