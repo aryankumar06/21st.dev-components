@@ -1,4 +1,4 @@
-npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
+// npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
 import { Component } from "@/components/ui/job-application-tracker-notion-style";
 
 export default function DemoOne() {
@@ -296,6 +296,8 @@ export const Component = () => {
         {/* Theme toggle */}
         <button
           onClick={toggleTheme}
+          aria-label="Toggle theme"
+          title="Toggle theme"
           style={{
             position: "absolute", top: 0, right: 0,
             background: t.surface, border: `1px solid ${t.border}`,
@@ -340,6 +342,8 @@ export const Component = () => {
                   <span>📄</span> {resumeFile}
                   <button
                     onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
+                    aria-label="Remove resume"
+                    title="Remove resume"
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
                   >
                     <XIcon size={12} />
@@ -405,6 +409,7 @@ export const Component = () => {
               {/* Filter */}
               <div style={{ position: "relative" }} ref={filterMenuRef}>
                 <button
+                  aria-label="Filter by stage"
                   title="Filter by stage"
                   onClick={() => setShowFilterMenu((v) => !v)}
                   style={iconBtn(filterStage !== "all" || showFilterMenu)}
@@ -449,6 +454,7 @@ export const Component = () => {
               {/* Sort */}
               <div style={{ position: "relative" }} ref={sortMenuRef}>
                 <button
+                  aria-label="Sort"
                   title="Sort"
                   onClick={() => setShowSortMenu((v) => !v)}
                   style={iconBtn(sortField !== "none" || showSortMenu)}
@@ -506,6 +512,7 @@ export const Component = () => {
 
               {/* Search */}
               <button
+                aria-label="Search"
                 title="Search"
                 onClick={() => { setShowSearch((v) => !v); setTimeout(() => searchRef.current?.focus(), 50); }}
                 style={iconBtn(showSearch)}
@@ -517,6 +524,7 @@ export const Component = () => {
 
               {/* Expand */}
               <button
+                aria-label={isExpanded ? "Collapse" : "Expand"}
                 title={isExpanded ? "Collapse" : "Expand"}
                 onClick={() => setIsExpanded((v) => !v)}
                 style={iconBtn(isExpanded)}
@@ -531,6 +539,7 @@ export const Component = () => {
 
               {/* Settings */}
               <button
+                aria-label="Settings"
                 title="Settings"
                 onClick={() => setShowSettings(true)}
                 style={iconBtn(showSettings)}
@@ -556,6 +565,8 @@ export const Component = () => {
                   </button>
                   <button
                     onClick={() => setShowNewDropdown((v) => !v)}
+                    aria-label="Add to stage options"
+                    title="Add to stage options"
                     style={{
                       background: "#3b82f6", color: "#fff", border: "none",
                       borderLeft: "1px solid rgba(255,255,255,0.25)",
@@ -620,6 +631,8 @@ export const Component = () => {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                  title="Clear search"
                   style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: t.muted }}
                 >
                   <XIcon size={13} />
@@ -826,15 +839,17 @@ export const Component = () => {
                     <div style={{ display: "flex", gap: 4 }} onClick={(e) => e.stopPropagation()}>
                       <button
                         onClick={() => setEditApp({ ...app })}
-                        style={{ background: t.surfaceAlt, border: "none", borderRadius: 5, width: 28, height: 28, cursor: "pointer", color: t.muted, display: "flex", alignItems: "center", justifyContent: "center" }}
+                        aria-label="Edit"
                         title="Edit"
+                        style={{ background: t.surfaceAlt, border: "none", borderRadius: 5, width: 28, height: 28, cursor: "pointer", color: t.muted, display: "flex", alignItems: "center", justifyContent: "center" }}
                       >
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
                       </button>
                       <button
                         onClick={() => deleteApp(app.id)}
-                        style={{ background: t.surfaceAlt, border: "none", borderRadius: 5, width: 28, height: 28, cursor: "pointer", color: "#ef4444", display: "flex", alignItems: "center", justifyContent: "center" }}
+                        aria-label="Delete"
                         title="Delete"
+                        style={{ background: t.surfaceAlt, border: "none", borderRadius: 5, width: 28, height: 28, cursor: "pointer", color: "#ef4444", display: "flex", alignItems: "center", justifyContent: "center" }}
                       >
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /><path d="M10 11v6M14 11v6" /><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" /></svg>
                       </button>
@@ -866,25 +881,29 @@ export const Component = () => {
                   transition: "color 0.2s",
                 }}
               >
-                <div
+                <button
                   onClick={() => toggleAction(item.id)}
+                  aria-label="Toggle action item status"
+                  title="Toggle action item status"
                   style={{
                     width: 18, height: 18, borderRadius: 4, flexShrink: 0,
                     cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
                     background: item.done ? "#3b82f6" : "transparent",
                     border: `1.5px solid ${item.done ? "#3b82f6" : t.border}`,
                     transition: "all 0.15s",
+                    padding: 0,
                   }}
                 >
                   {item.done && <CheckIcon />}
-                </div>
+                </button>
                 <span style={{ flex: 1, textDecoration: item.done ? "line-through" : "none" }}>{item.text}</span>
                 <button
                   onClick={() => deleteAction(item.id)}
+                  aria-label="Delete action item"
+                  title="Delete action item"
                   style={{ background: "none", border: "none", cursor: "pointer", color: t.subtle, padding: 4, display: "flex", alignItems: "center", borderRadius: 4, transition: "color 0.15s" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#ef4444")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = t.subtle)}
-                  title="Delete"
                 >
                   <XIcon size={13} />
                 </button>
@@ -933,7 +952,7 @@ export const Component = () => {
                   <div style={{ fontSize: 13, color: t.muted }}>{selectedApp.role}</div>
                 </div>
               </div>
-              <button onClick={() => setSelectedApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}>
+              <button onClick={() => setSelectedApp(null)} aria-label="Close modal" title="Close modal" style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}>
                 <XIcon />
               </button>
             </div>
@@ -1029,7 +1048,7 @@ export const Component = () => {
           <div style={{ padding: "20px 24px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
               <div style={{ fontWeight: 700, fontSize: 17 }}>Edit Application</div>
-              <button onClick={() => setEditApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
+              <button onClick={() => setEditApp(null)} aria-label="Close modal" title="Close modal" style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
             </div>
 
             <div style={{ marginBottom: 14 }}>
@@ -1109,7 +1128,7 @@ export const Component = () => {
           <div style={{ padding: "20px 24px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
               <div style={{ fontWeight: 700, fontSize: 17 }}>Settings</div>
-              <button onClick={() => setShowSettings(false)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
+              <button onClick={() => setShowSettings(false)} aria-label="Close modal" title="Close modal" style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
             </div>
 
             {[
