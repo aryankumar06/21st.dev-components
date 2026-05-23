@@ -93,7 +93,7 @@ const Modal = ({ title, onClose, dark, children }) => {
       <div className={cn("w-full max-w-md rounded-xl border shadow-2xl", modal)}>
         <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: divCol }}>
           <h2 className={cn("font-semibold text-base", titleCls)}>{title}</h2>
-          <button onClick={onClose} className={cn("p-1.5 rounded-md transition-colors", closeCls)}>
+          <button onClick={onClose} aria-label="Close" title="Close" className={cn("p-1.5 rounded-md transition-colors", closeCls)}>
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -260,7 +260,7 @@ export const Component = () => {
     header: "bg-[#171717]", rowHover: "hover:bg-[#1a1a1a]",
     text: "text-white", subtext: "text-gray-400", muted: "text-gray-500",
     tag: "bg-[#1d1d1d]", tagText: "text-gray-300",
-    iconBtn: "hover:bg-[#1d1d1d]", newBtn: "bg-[#2f6fed] hover:bg-[#275fe0]",
+    iconBtn: "hover:bg-[#1d1d1d]", newBtn: "bg-[#2f6fed] hover:bg-[#275fe0] disabled:opacity-50 disabled:cursor-not-allowed",
     dayText: "text-[#e6e6e6]", progressBg: "bg-[#2a2a2a]", progressFill: "bg-[#2f6fed]",
     cellBorder: "border-[#2a2a2a]", toggleBg: "bg-[#1d1d1d] hover:bg-[#2a2a2a] border-[#3a3a3a]",
     input: "bg-[#111] border-[#333] text-white placeholder-gray-600 focus:border-[#2f6fed]",
@@ -273,7 +273,7 @@ export const Component = () => {
     header: "bg-[#fafafa]", rowHover: "hover:bg-[#f9f9f9]",
     text: "text-[#1a1a1a]", subtext: "text-[#6b6b6b]", muted: "text-[#aaaaaa]",
     tag: "bg-[#f0f0ee]", tagText: "text-[#555]",
-    iconBtn: "hover:bg-[#f0f0f0]", newBtn: "bg-[#2f6fed] hover:bg-[#275fe0]",
+    iconBtn: "hover:bg-[#f0f0f0]", newBtn: "bg-[#2f6fed] hover:bg-[#275fe0] disabled:opacity-50 disabled:cursor-not-allowed",
     dayText: "text-[#2a2a2a]", progressBg: "bg-[#e8e8e8]", progressFill: "bg-[#2f6fed]",
     cellBorder: "border-[#e8e8e8]", toggleBg: "bg-[#f0f0ee] hover:bg-[#e8e8e6] border-[#e0e0e0]",
     input: "bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-[#2f6fed]",
@@ -318,13 +318,13 @@ export const Component = () => {
                   {filterConfig && (
                     <div className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-medium", t.pill)}>
                       <Filter className="w-3 h-3" />Filtered
-                      <button onClick={() => setFilterConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100"><X className="w-3 h-3" /></button>
+                      <button aria-label="Clear filter" title="Clear filter" onClick={() => setFilterConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100"><X className="w-3 h-3" /></button>
                     </div>
                   )}
                   {sortConfig && (
                     <div className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-medium", t.pill)}>
                       <ArrowUpDown className="w-3 h-3" />Sorted
-                      <button onClick={() => setSortConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100"><X className="w-3 h-3" /></button>
+                      <button aria-label="Clear sort" title="Clear sort" onClick={() => setSortConfig(null)} className="ml-0.5 opacity-60 hover:opacity-100"><X className="w-3 h-3" /></button>
                     </div>
                   )}
                 </div>
@@ -663,7 +663,7 @@ export const Component = () => {
             </div>
             <div className="flex justify-end gap-2 pt-1">
               <button onClick={() => setShowAddColumnModal(false)} className={secondaryBtn}>Cancel</button>
-              <button onClick={handleAddColumn} disabled={!newColLabel.trim()} className={primaryBtn}>Add Column</button>
+              <button onClick={handleAddColumn} disabled={!newColLabel.trim()} title={!newColLabel.trim() ? "Column name is required" : "Add Column"} className={primaryBtn}>Add Column</button>
             </div>
           </div>
         </Modal>
@@ -682,7 +682,7 @@ export const Component = () => {
             </div>
             <div className="flex justify-end gap-2 pt-1">
               <button onClick={() => setShowNewRowModal(false)} className={secondaryBtn}>Cancel</button>
-              <button onClick={handleAddRow} disabled={!newRowDay.trim()} className={primaryBtn}>Add Row</button>
+              <button onClick={handleAddRow} disabled={!newRowDay.trim()} title={!newRowDay.trim() ? "Row label is required" : "Add Row"} className={primaryBtn}>Add Row</button>
             </div>
           </div>
         </Modal>
