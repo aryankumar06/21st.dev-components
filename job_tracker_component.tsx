@@ -1,12 +1,11 @@
-npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
-import { Component } from "@/components/ui/job-application-tracker-notion-style";
-
-export default function DemoOne() {
-  return <Component />;
-}
-
+// npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
+import { Component as TrackerComponent } from "@/components/ui/job-application-tracker-notion-style";
+
+export default function DemoOne() {
+  return <TrackerComponent />;
+}
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -738,7 +737,7 @@ export const Component = () => {
                         style={{ ...inputStyle, marginBottom: 8 }}
                       />
                       <div style={{ display: "flex", gap: 6 }}>
-                        <button onClick={() => addApp(stage.key)} style={{ flex: 1, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 6, padding: "6px 0", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Add</button>
+                        <button disabled={!newAppName.trim()} title={!newAppName.trim() ? "Enter a company name to add" : undefined} onClick={() => addApp(stage.key)} style={{ flex: 1, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 6, padding: "6px 0", fontSize: 13, cursor: !newAppName.trim() ? "not-allowed" : "pointer", opacity: !newAppName.trim() ? 0.5 : 1, fontFamily: "inherit" }}>Add</button>
                         <button onClick={() => { setAddingToStage(null); setNewAppName(""); setNewAppRole(""); }} style={{ flex: 1, background: t.surfaceAlt, color: t.muted, border: "none", borderRadius: 6, padding: "6px 0", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Cancel</button>
                       </div>
                     </div>
@@ -901,11 +900,15 @@ export const Component = () => {
               style={{ ...inputStyle, flex: 1 }}
             />
             <button
+              disabled={!newActionText.trim()}
+              title={!newActionText.trim() ? "Enter an action item to add" : undefined}
               onClick={addAction}
               style={{
                 background: "#3b82f6", color: "#fff", border: "none",
                 borderRadius: 6, padding: "7px 16px", fontSize: 13,
-                fontFamily: "inherit", fontWeight: 600, cursor: "pointer",
+                fontFamily: "inherit", fontWeight: 600,
+                cursor: !newActionText.trim() ? "not-allowed" : "pointer",
+                opacity: !newActionText.trim() ? 0.5 : 1,
               }}
             >
               Add
@@ -1087,8 +1090,10 @@ export const Component = () => {
 
             <div style={{ display: "flex", gap: 8 }}>
               <button
+                disabled={!editApp.company.trim()}
+                title={!editApp.company.trim() ? "Company name is required" : undefined}
                 onClick={saveEdit}
-                style={{ flex: 1, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 7, padding: "9px 0", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}
+                style={{ flex: 1, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 7, padding: "9px 0", fontSize: 13, fontWeight: 600, cursor: !editApp.company.trim() ? "not-allowed" : "pointer", opacity: !editApp.company.trim() ? 0.5 : 1, fontFamily: "inherit" }}
               >
                 Save changes
               </button>
