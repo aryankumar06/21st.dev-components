@@ -1,8 +1,8 @@
-npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
-import { Component } from "@/components/ui/job-application-tracker-notion-style";
+// npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
+import { Component as JobTrackerComponent } from "@/components/ui/job-application-tracker-notion-style";
 
 export default function DemoOne() {
-  return <Component />;
+  return <JobTrackerComponent />;
 }
 
 import { cn } from "@/lib/utils";
@@ -866,7 +866,9 @@ export const Component = () => {
                   transition: "color 0.2s",
                 }}
               >
-                <div
+                <button
+                  type="button"
+                  aria-label={item.done ? "Mark as incomplete" : "Mark as complete"}
                   onClick={() => toggleAction(item.id)}
                   style={{
                     width: 18, height: 18, borderRadius: 4, flexShrink: 0,
@@ -877,9 +879,11 @@ export const Component = () => {
                   }}
                 >
                   {item.done && <CheckIcon />}
-                </div>
+                </button>
                 <span style={{ flex: 1, textDecoration: item.done ? "line-through" : "none" }}>{item.text}</span>
                 <button
+                  type="button"
+                  aria-label="Delete action item"
                   onClick={() => deleteAction(item.id)}
                   style={{ background: "none", border: "none", cursor: "pointer", color: t.subtle, padding: 4, display: "flex", alignItems: "center", borderRadius: 4, transition: "color 0.15s" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#ef4444")}
@@ -1121,11 +1125,16 @@ export const Component = () => {
                   <div style={{ fontSize: 14, fontWeight: 500 }}>{label}</div>
                   <div style={{ fontSize: 12, color: t.muted, marginTop: 2 }}>{desc}</div>
                 </div>
-                <div
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={value}
+                  aria-label={label}
                   onClick={() => set(!value)}
                   style={{
                     width: 42, height: 24, borderRadius: 12, cursor: "pointer",
                     background: value ? "#3b82f6" : t.border,
+                    border: "none",
                     position: "relative", transition: "background 0.2s", flexShrink: 0,
                   }}
                 >
@@ -1135,7 +1144,7 @@ export const Component = () => {
                     background: "#fff", transition: "left 0.2s",
                     boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
                   }} />
-                </div>
+                </button>
               </div>
             ))}
 
