@@ -1,8 +1,8 @@
-npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
-import { Component } from "@/components/ui/job-application-tracker-notion-style";
+// npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
+import { Component as JobApplicationTracker } from "@/components/ui/job-application-tracker-notion-style";
 
 export default function DemoOne() {
-  return <Component />;
+  return <JobApplicationTracker />;
 }
 
 import { cn } from "@/lib/utils";
@@ -152,6 +152,7 @@ export const Component = () => {
   const filterMenuRef = useRef<HTMLDivElement>(null!);
   const newDropdownRef = useRef<HTMLDivElement>(null!);
   const searchRef = useRef<HTMLInputElement>(null!);
+  const fileInputRef = useRef<HTMLInputElement>(null!);
 
   useClickOutside(sortMenuRef, () => setShowSortMenu(false));
   useClickOutside(filterMenuRef, () => setShowFilterMenu(false));
@@ -319,6 +320,15 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                fileInputRef.current?.click();
+              }
+            }}
+            onFocus={(e) => (e.currentTarget.style.outline = "2px solid #3b82f6")}
+            onBlur={(e) => (e.currentTarget.style.outline = "none")}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
@@ -339,8 +349,10 @@ export const Component = () => {
               ? <span style={{ color: t.text, display: "flex", alignItems: "center", gap: 8 }}>
                   <span>📄</span> {resumeFile}
                   <button
-                    onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setResumeFile(null); }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
+                    aria-label="Remove resume"
+                    title="Remove resume"
                   >
                     <XIcon size={12} />
                   </button>
@@ -348,6 +360,7 @@ export const Component = () => {
               : "Upload or embed a file"
             }
             <input
+              ref={fileInputRef}
               type="file"
               style={{ display: "none" }}
               accept=".pdf,.doc,.docx"
@@ -738,7 +751,14 @@ export const Component = () => {
                         style={{ ...inputStyle, marginBottom: 8 }}
                       />
                       <div style={{ display: "flex", gap: 6 }}>
-                        <button onClick={() => addApp(stage.key)} style={{ flex: 1, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 6, padding: "6px 0", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Add</button>
+                        <button
+                          onClick={() => addApp(stage.key)}
+                          disabled={!newAppName.trim()}
+                          title={!newAppName.trim() ? "Company name is required" : undefined}
+                          style={{ flex: 1, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 6, padding: "6px 0", fontSize: 13, cursor: !newAppName.trim() ? "not-allowed" : "pointer", opacity: !newAppName.trim() ? 0.5 : 1, fontFamily: "inherit" }}
+                        >
+                          Add
+                        </button>
                         <button onClick={() => { setAddingToStage(null); setNewAppName(""); setNewAppRole(""); }} style={{ flex: 1, background: t.surfaceAlt, color: t.muted, border: "none", borderRadius: 6, padding: "6px 0", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Cancel</button>
                       </div>
                     </div>
@@ -902,10 +922,13 @@ export const Component = () => {
             />
             <button
               onClick={addAction}
+              disabled={!newActionText.trim()}
+              title={!newActionText.trim() ? "Action item text is required" : undefined}
               style={{
                 background: "#3b82f6", color: "#fff", border: "none",
                 borderRadius: 6, padding: "7px 16px", fontSize: 13,
-                fontFamily: "inherit", fontWeight: 600, cursor: "pointer",
+                fontFamily: "inherit", fontWeight: 600, cursor: !newActionText.trim() ? "not-allowed" : "pointer",
+                opacity: !newActionText.trim() ? 0.5 : 1,
               }}
             >
               Add
@@ -1088,7 +1111,9 @@ export const Component = () => {
             <div style={{ display: "flex", gap: 8 }}>
               <button
                 onClick={saveEdit}
-                style={{ flex: 1, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 7, padding: "9px 0", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}
+                disabled={!editApp.company.trim()}
+                title={!editApp.company.trim() ? "Company name is required" : undefined}
+                style={{ flex: 1, background: "#3b82f6", color: "#fff", border: "none", borderRadius: 7, padding: "9px 0", fontSize: 13, fontWeight: 600, cursor: !editApp.company.trim() ? "not-allowed" : "pointer", opacity: !editApp.company.trim() ? 0.5 : 1, fontFamily: "inherit" }}
               >
                 Save changes
               </button>
