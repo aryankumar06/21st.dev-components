@@ -443,7 +443,8 @@ export const Component = () => {
                         <span className="whitespace-nowrap">{col.label}</span>
                         <button
                           onClick={(e) => { e.stopPropagation(); setColMenuKey(colMenuKey === col.key ? null : col.key); }}
-                          className={cn("ml-1 opacity-0 group-hover:opacity-100 p-0.5 rounded transition-all", t.iconBtn)}
+                          aria-label="Column actions" title="Column actions"
+                          className={cn("ml-1 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[#2f6fed] outline-none p-0.5 rounded transition-all", t.iconBtn)}
                         >
                           <ChevronDown className="w-3 h-3" />
                         </button>
@@ -464,8 +465,8 @@ export const Component = () => {
                     </th>
                   ))}
                   <th className={cn("px-4 py-3 text-center border-r w-12", t.subtext, t.cellBorder)}>
-                    <button onClick={() => setShowAddColumnModal(true)} title="Add column"
-                      className={cn("p-1 rounded transition-colors mx-auto block", t.iconBtn)}>
+                    <button onClick={() => setShowAddColumnModal(true)} aria-label="Add column" title="Add column"
+                      className={cn("p-1 rounded transition-colors mx-auto block focus-visible:ring-2 focus-visible:ring-[#2f6fed] outline-none", t.iconBtn)}>
                       <Plus className="w-3.5 h-3.5" />
                     </button>
                   </th>
@@ -492,8 +493,8 @@ export const Component = () => {
                       ))}
                       {/* Check-all cell */}
                       <td className={cn("px-4 py-3.5 border-r text-center", t.cellBorder)}>
-                        <button onClick={() => handleCheckAllForDay(row.day)} title="Check all for this day"
-                          className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}>
+                        <button onClick={() => handleCheckAllForDay(row.day)} aria-label={`Check all habits for ${row.day}`} title={`Check all habits for ${row.day}`}
+                          className={cn("opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[#2f6fed] outline-none p-1 rounded transition-all", t.iconBtn, t.muted)}>
                           <Check className="w-3.5 h-3.5" />
                         </button>
                       </td>
@@ -502,7 +503,8 @@ export const Component = () => {
                         <div className="relative inline-block">
                           <button
                             onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
-                            className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}
+                            aria-label={`Row actions for ${row.day}`} title={`Row actions for ${row.day}`}
+                            className={cn("opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[#2f6fed] outline-none p-1 rounded transition-all", t.iconBtn, t.muted)}
                           >
                             <MoreHorizontal className="w-3.5 h-3.5" />
                           </button>
@@ -584,7 +586,8 @@ export const Component = () => {
                   <div className="w-8 flex justify-center relative">
                     <button
                       onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
-                      className={cn("p-1 rounded transition-colors", t.iconBtn, t.muted)}
+                      aria-label={`Row actions for ${row.day}`} title={`Row actions for ${row.day}`}
+                      className={cn("p-1 rounded transition-colors focus-visible:ring-2 focus-visible:ring-[#2f6fed] outline-none", t.iconBtn, t.muted)}
                     >
                       <MoreHorizontal className="w-4 h-4" />
                     </button>
