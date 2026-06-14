@@ -405,7 +405,7 @@ export const Component = () => {
               {/* Filter */}
               <div style={{ position: "relative" }} ref={filterMenuRef}>
                 <button
-                  title="Filter by stage"
+                  title="Filter by stage" aria-label="Filter by stage"
                   onClick={() => setShowFilterMenu((v) => !v)}
                   style={iconBtn(filterStage !== "all" || showFilterMenu)}
                 >
@@ -449,7 +449,7 @@ export const Component = () => {
               {/* Sort */}
               <div style={{ position: "relative" }} ref={sortMenuRef}>
                 <button
-                  title="Sort"
+                  title="Sort" aria-label="Sort"
                   onClick={() => setShowSortMenu((v) => !v)}
                   style={iconBtn(sortField !== "none" || showSortMenu)}
                 >
@@ -506,7 +506,7 @@ export const Component = () => {
 
               {/* Search */}
               <button
-                title="Search"
+                title="Search" aria-label="Search"
                 onClick={() => { setShowSearch((v) => !v); setTimeout(() => searchRef.current?.focus(), 50); }}
                 style={iconBtn(showSearch)}
               >
@@ -518,6 +518,7 @@ export const Component = () => {
               {/* Expand */}
               <button
                 title={isExpanded ? "Collapse" : "Expand"}
+                        aria-label={isExpanded ? "Collapse" : "Expand"}
                 onClick={() => setIsExpanded((v) => !v)}
                 style={iconBtn(isExpanded)}
               >
@@ -531,7 +532,7 @@ export const Component = () => {
 
               {/* Settings */}
               <button
-                title="Settings"
+                title="Settings" aria-label="Settings"
                 onClick={() => setShowSettings(true)}
                 style={iconBtn(showSettings)}
               >
@@ -638,7 +639,7 @@ export const Component = () => {
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
                   Stage: {STAGES.find((s) => s.key === filterStage)?.label}
-                  <button onClick={() => setFilterStage("all")} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
+                  <button aria-label="Clear filter" onClick={() => setFilterStage("all")} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
                 </span>
               )}
               {sortField !== "none" && (
@@ -648,7 +649,7 @@ export const Component = () => {
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
                   Sort: {sortField} {sortDir === "asc" ? "↑" : "↓"}
-                  <button onClick={clearSort} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
+                  <button aria-label="Clear sort" onClick={clearSort} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
                 </span>
               )}
             </div>
@@ -827,14 +828,14 @@ export const Component = () => {
                       <button
                         onClick={() => setEditApp({ ...app })}
                         style={{ background: t.surfaceAlt, border: "none", borderRadius: 5, width: 28, height: 28, cursor: "pointer", color: t.muted, display: "flex", alignItems: "center", justifyContent: "center" }}
-                        title="Edit"
+                        title="Edit" aria-label="Edit"
                       >
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
                       </button>
                       <button
                         onClick={() => deleteApp(app.id)}
                         style={{ background: t.surfaceAlt, border: "none", borderRadius: 5, width: 28, height: 28, cursor: "pointer", color: "#ef4444", display: "flex", alignItems: "center", justifyContent: "center" }}
-                        title="Delete"
+                        title="Delete" aria-label="Delete"
                       >
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /><path d="M10 11v6M14 11v6" /><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" /></svg>
                       </button>
@@ -884,7 +885,7 @@ export const Component = () => {
                   style={{ background: "none", border: "none", cursor: "pointer", color: t.subtle, padding: 4, display: "flex", alignItems: "center", borderRadius: 4, transition: "color 0.15s" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#ef4444")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = t.subtle)}
-                  title="Delete"
+                  title="Delete" aria-label="Delete"
                 >
                   <XIcon size={13} />
                 </button>
