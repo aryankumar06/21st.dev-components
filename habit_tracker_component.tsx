@@ -464,7 +464,7 @@ export const Component = () => {
                     </th>
                   ))}
                   <th className={cn("px-4 py-3 text-center border-r w-12", t.subtext, t.cellBorder)}>
-                    <button onClick={() => setShowAddColumnModal(true)} title="Add column"
+                    <button onClick={() => setShowAddColumnModal(true)} title="Add column" aria-label="Add column"
                       className={cn("p-1 rounded transition-colors mx-auto block", t.iconBtn)}>
                       <Plus className="w-3.5 h-3.5" />
                     </button>
@@ -492,7 +492,7 @@ export const Component = () => {
                       ))}
                       {/* Check-all cell */}
                       <td className={cn("px-4 py-3.5 border-r text-center", t.cellBorder)}>
-                        <button onClick={() => handleCheckAllForDay(row.day)} title="Check all for this day"
+                        <button onClick={() => handleCheckAllForDay(row.day)} title="Check all for this day" aria-label="Check all for this day"
                           className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}>
                           <Check className="w-3.5 h-3.5" />
                         </button>
@@ -703,6 +703,7 @@ export const Component = () => {
                     </div>
                     <div className="flex items-center gap-1">
                       <button onClick={() => handleToggleColumnVis(col.key)} title={col.visible ? "Hide" : "Show"}
+                        aria-label={col.visible ? "Hide" : "Show"}
                         className={cn("p-1.5 rounded transition-colors", t.iconBtn)}>
                         {col.visible
                           ? <Eye className={cn("w-3.5 h-3.5", t.subtext)} />
