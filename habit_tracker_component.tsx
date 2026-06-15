@@ -285,7 +285,7 @@ export const Component = () => {
 
   const inputCls = cn("w-full px-3 py-2 rounded-lg border text-sm outline-none transition-colors", t.input);
   const labelCls = cn("block text-xs font-medium mb-1.5", t.subtext);
-  const primaryBtn = cn("px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors", t.newBtn);
+  const primaryBtn = cn("px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed", t.newBtn);
   const secondaryBtn = cn("px-4 py-2 rounded-lg text-sm font-medium transition-colors border",
     dark ? "border-[#333] text-gray-300 hover:bg-[#1d1d1d]" : "border-gray-300 text-gray-600 hover:bg-gray-50");
 
@@ -443,7 +443,9 @@ export const Component = () => {
                         <span className="whitespace-nowrap">{col.label}</span>
                         <button
                           onClick={(e) => { e.stopPropagation(); setColMenuKey(colMenuKey === col.key ? null : col.key); }}
-                          className={cn("ml-1 opacity-0 group-hover:opacity-100 p-0.5 rounded transition-all", t.iconBtn)}
+                          aria-label="Column menu"
+                          title="Column menu"
+                          className={cn("ml-1 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none p-0.5 rounded transition-all", t.iconBtn)}
                         >
                           <ChevronDown className="w-3 h-3" />
                         </button>
@@ -492,8 +494,8 @@ export const Component = () => {
                       ))}
                       {/* Check-all cell */}
                       <td className={cn("px-4 py-3.5 border-r text-center", t.cellBorder)}>
-                        <button onClick={() => handleCheckAllForDay(row.day)} title="Check all for this day"
-                          className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}>
+                        <button onClick={() => handleCheckAllForDay(row.day)} title={`Check all for ${row.day}`} aria-label={`Check all for ${row.day}`}
+                          className={cn("opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none p-1 rounded transition-all", t.iconBtn, t.muted)}>
                           <Check className="w-3.5 h-3.5" />
                         </button>
                       </td>
@@ -502,7 +504,9 @@ export const Component = () => {
                         <div className="relative inline-block">
                           <button
                             onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
-                            className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}
+                            aria-label={`Row menu for ${row.day}`}
+                            title={`Row menu for ${row.day}`}
+                            className={cn("opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none p-1 rounded transition-all", t.iconBtn, t.muted)}
                           >
                             <MoreHorizontal className="w-3.5 h-3.5" />
                           </button>
@@ -663,7 +667,9 @@ export const Component = () => {
             </div>
             <div className="flex justify-end gap-2 pt-1">
               <button onClick={() => setShowAddColumnModal(false)} className={secondaryBtn}>Cancel</button>
-              <button onClick={handleAddColumn} disabled={!newColLabel.trim()} className={primaryBtn}>Add Column</button>
+              <span title={!newColLabel.trim() ? "Please enter a column name" : undefined}>
+                <button onClick={handleAddColumn} disabled={!newColLabel.trim()} className={primaryBtn}>Add Column</button>
+              </span>
             </div>
           </div>
         </Modal>
@@ -682,7 +688,9 @@ export const Component = () => {
             </div>
             <div className="flex justify-end gap-2 pt-1">
               <button onClick={() => setShowNewRowModal(false)} className={secondaryBtn}>Cancel</button>
-              <button onClick={handleAddRow} disabled={!newRowDay.trim()} className={primaryBtn}>Add Row</button>
+              <span title={!newRowDay.trim() ? "Please enter a row label" : undefined}>
+                <button onClick={handleAddRow} disabled={!newRowDay.trim()} className={primaryBtn}>Add Row</button>
+              </span>
             </div>
           </div>
         </Modal>
