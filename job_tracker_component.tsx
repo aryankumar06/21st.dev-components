@@ -319,15 +319,35 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
               borderRadius: 8, padding: "16px 20px",
               fontSize: 14, color: t.muted, cursor: "pointer",
-              transition: "border-color 0.2s",
+              transition: "border-color 0.2s, outline 0.2s",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
-            onMouseLeave={(e) => (e.currentTarget.style.borderColor = t.border)}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = t.border;
+              e.currentTarget.style.outline = "none";
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = "#3b82f6";
+              e.currentTarget.style.outline = "2px solid #3b82f6";
+              e.currentTarget.style.outlineOffset = "2px";
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = t.border;
+              e.currentTarget.style.outline = "none";
+            }}
+            onKeyDown={(e) => {
+              if (e.target !== e.currentTarget) return;
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.currentTarget.querySelector("input")?.click();
+              }
+            }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -339,7 +359,16 @@ export const Component = () => {
               ? <span style={{ color: t.text, display: "flex", alignItems: "center", gap: 8 }}>
                   <span>📄</span> {resumeFile}
                   <button
+                    aria-label="Remove file"
+                    title="Remove file"
                     onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setResumeFile(null);
+                        e.stopPropagation();
+                      }
+                    }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
                   >
                     <XIcon size={12} />
