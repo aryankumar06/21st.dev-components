@@ -122,6 +122,8 @@ const Modal = ({ children, onClose, t }: { children: React.ReactNode; onClose: (
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export const Component = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isLabelFocused, setIsLabelFocused] = useState(false);
   const [apps, setApps] = useState<Application[]>(INITIAL_APPS);
   const [actions, setActions] = useState<ActionItem[]>(INITIAL_ACTIONS);
   const [activeTab, setActiveTab] = useState<"grouped" | "all">("grouped");
@@ -319,12 +321,24 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
+            onFocus={() => setIsLabelFocused(true)}
+            onBlur={() => setIsLabelFocused(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                if (e.target === e.currentTarget) {
+                  fileInputRef.current?.click();
+                }
+              }
+            }}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
               borderRadius: 8, padding: "16px 20px",
               fontSize: 14, color: t.muted, cursor: "pointer",
               transition: "border-color 0.2s",
+              boxShadow: isLabelFocused ? "0 0 0 2px #3b82f6" : "none",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = t.border)}
@@ -348,6 +362,7 @@ export const Component = () => {
               : "Upload or embed a file"
             }
             <input
+              ref={fileInputRef}
               type="file"
               style={{ display: "none" }}
               accept=".pdf,.doc,.docx"
