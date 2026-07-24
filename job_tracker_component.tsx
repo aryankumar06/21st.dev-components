@@ -319,6 +319,15 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
+            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            onKeyDown={(e) => {
+              if (e.target !== e.currentTarget) return;
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                (e.currentTarget.querySelector('input[type="file"]') as HTMLInputElement)?.click();
+              }
+            }}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
@@ -339,6 +348,8 @@ export const Component = () => {
               ? <span style={{ color: t.text, display: "flex", alignItems: "center", gap: 8 }}>
                   <span>📄</span> {resumeFile}
                   <button
+                    aria-label="Remove resume"
+                    title="Remove resume"
                     onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
                   >
