@@ -785,8 +785,20 @@ export const Component = () => {
                 <span>Actions</span>
               </div>
               {filteredApps.length === 0 && (
-                <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14 }}>
-                  No applications match your search
+                <div style={{ padding: "32px 16px", textAlign: "center", color: t.muted, fontSize: 14, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                  <span>No applications match your search or filters.</span>
+                  <button
+                    onClick={() => { setSearchQuery(""); setFilterStage("all"); }}
+                    style={{
+                      padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 500,
+                      background: t.surfaceAlt, color: t.text, border: `1px solid ${t.border}`,
+                      cursor: "pointer", transition: "all 0.15s", fontFamily: "inherit"
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = isDark ? "#2e2e2e" : "#ececec")}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = t.surfaceAlt)}
+                  >
+                    Clear filters
+                  </button>
                 </div>
               )}
               {filteredApps.map((app, i) => {

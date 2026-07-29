@@ -530,7 +530,16 @@ export const Component = () => {
                 {displayedHabits.length === 0 && (
                   <tr>
                     <td colSpan={visibleCols.length + 3} className={cn("px-5 py-10 text-center text-sm", t.muted)}>
-                      No rows match your search or filter.
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <span>No rows match your search or filter.</span>
+                        <button
+                          onClick={() => { setSearchQuery(""); setFilterConfig(null); }}
+                          className={cn("px-3 py-1.5 rounded-md text-xs font-medium transition-colors border",
+                            dark ? "border-[#333] text-gray-300 hover:bg-[#1d1d1d]" : "border-gray-300 text-gray-600 hover:bg-gray-50")}
+                        >
+                          Clear filters
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 )}
