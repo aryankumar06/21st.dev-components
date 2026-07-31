@@ -319,12 +319,22 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) {
+                e.preventDefault();
+                e.currentTarget.click();
+              }
+            }}
+            onFocus={(e) => (e.currentTarget.style.boxShadow = "0 0 0 2px #3b82f6")}
+            onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
               borderRadius: 8, padding: "16px 20px",
               fontSize: 14, color: t.muted, cursor: "pointer",
-              transition: "border-color 0.2s",
+              transition: "border-color 0.2s, box-shadow 0.2s",
+              outline: "none",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = t.border)}
