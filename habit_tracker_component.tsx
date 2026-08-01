@@ -443,7 +443,9 @@ export const Component = () => {
                         <span className="whitespace-nowrap">{col.label}</span>
                         <button
                           onClick={(e) => { e.stopPropagation(); setColMenuKey(colMenuKey === col.key ? null : col.key); }}
-                          className={cn("ml-1 opacity-0 group-hover:opacity-100 p-0.5 rounded transition-all", t.iconBtn)}
+                          className={cn("ml-1 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none p-0.5 rounded transition-all", t.iconBtn)}
+                          aria-label="Column menu"
+                          title="Column menu"
                         >
                           <ChevronDown className="w-3 h-3" />
                         </button>
@@ -492,8 +494,8 @@ export const Component = () => {
                       ))}
                       {/* Check-all cell */}
                       <td className={cn("px-4 py-3.5 border-r text-center", t.cellBorder)}>
-                        <button onClick={() => handleCheckAllForDay(row.day)} title="Check all for this day"
-                          className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}>
+                        <button onClick={() => handleCheckAllForDay(row.day)} title="Check all for this day" aria-label="Check all for this day"
+                          className={cn("opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none p-1 rounded transition-all", t.iconBtn, t.muted)}>
                           <Check className="w-3.5 h-3.5" />
                         </button>
                       </td>
@@ -502,7 +504,9 @@ export const Component = () => {
                         <div className="relative inline-block">
                           <button
                             onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
-                            className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}
+                            className={cn("opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none p-1 rounded transition-all", t.iconBtn, t.muted)}
+                            aria-label="Row menu"
+                            title="Row menu"
                           >
                             <MoreHorizontal className="w-3.5 h-3.5" />
                           </button>
