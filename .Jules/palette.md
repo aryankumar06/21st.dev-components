@@ -1,3 +1,7 @@
 ## 2024-05-24 - Accessibility and Tooltips on Icon-Only Buttons
 **Learning:** Icon-only buttons must explicitly declare both `aria-label` (for screen readers) and `title` (for visual tooltips). In Shadcn/Lucide setups, icons don't inherently communicate their action to either assistive technologies or sighted users needing clarification. Missing these attributes is a common accessibility trap in dense UIs like habit trackers.
 **Action:** Always add both `aria-label` and `title` attributes to icon-only buttons as a standard procedure to ensure an inclusive and intuitive user experience.
+
+## 2024-08-08 - Keyboard Accessibility on Hidden File Inputs
+**Learning:** When hiding standard `<input type="file">` elements to create custom upload zones (like wrapping them in a styled `<label>`), native keyboard interactivity is lost. Screen reader and keyboard users cannot trigger the upload dialog because the hidden input cannot receive focus, and the wrapping label doesn't naturally respond to `Enter` or `Space` keys to trigger the nested input's click event.
+**Action:** Always add `tabIndex={0}`, an `onKeyDown` handler (listening for 'Enter' and ' ', and calling `.click()` on the target), and explicit focus state styling (`onFocus` and `onBlur`) to the custom wrapper element to fully restore the lost native accessibility. Ensure the `onKeyDown` handler checks `e.target === e.currentTarget` to avoid triggering the upload when interacting with nested interactive elements (like a remove button).
