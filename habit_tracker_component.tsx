@@ -533,8 +533,18 @@ export const Component = () => {
                 })}
                 {displayedHabits.length === 0 && (
                   <tr>
-                    <td colSpan={visibleCols.length + 3} className={cn("px-5 py-10 text-center text-sm", t.muted)}>
-                      No rows match your search or filter.
+                    <td colSpan={visibleCols.length + 3} className="px-5 py-10 text-center">
+                      <div className="flex flex-col items-center gap-3">
+                        <span className={cn("text-sm", t.muted)}>No rows match your search or filter.</span>
+                        {(searchQuery || filterConfig) && (
+                          <button
+                            onClick={() => { setSearchQuery(""); setFilterConfig(null); }}
+                            className={secondaryBtn}
+                          >
+                            Clear filters/search
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 )}
@@ -609,6 +619,19 @@ export const Component = () => {
                 </div>
               );
             })}
+            {displayedHabits.length === 0 && (
+              <div className="px-5 py-10 text-center flex flex-col items-center gap-3">
+                <span className={cn("text-sm", t.muted)}>No rows match your search or filter.</span>
+                {(searchQuery || filterConfig) && (
+                  <button
+                    onClick={() => { setSearchQuery(""); setFilterConfig(null); }}
+                    className={secondaryBtn}
+                  >
+                    Clear filters/search
+                  </button>
+                )}
+              </div>
+            )}
             <div className={cn("flex items-center gap-2 px-4 py-2.5", t.header)}>
               <span className={cn("w-28 flex-shrink-0 text-[11px] tracking-wide font-medium", t.muted)}>
                 {getTotalChecked()}/{totalPossible}
