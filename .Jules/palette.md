@@ -5,3 +5,6 @@
 ## 2024-08-08 - Keyboard Accessibility on Hidden File Inputs
 **Learning:** When hiding standard `<input type="file">` elements to create custom upload zones (like wrapping them in a styled `<label>`), native keyboard interactivity is lost. Screen reader and keyboard users cannot trigger the upload dialog because the hidden input cannot receive focus, and the wrapping label doesn't naturally respond to `Enter` or `Space` keys to trigger the nested input's click event.
 **Action:** Always add `tabIndex={0}`, an `onKeyDown` handler (listening for 'Enter' and ' ', and calling `.click()` on the target), and explicit focus state styling (`onFocus` and `onBlur`) to the custom wrapper element to fully restore the lost native accessibility. Ensure the `onKeyDown` handler checks `e.target === e.currentTarget` to avoid triggering the upload when interacting with nested interactive elements (like a remove button).
+## 2026-08-09 - Empty States for Filtered Views
+**Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
+**Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
