@@ -334,6 +334,7 @@ export const Component = () => {
                 {/* Filter */}
                 <div className="relative" ref={filterRef}>
                   <button onClick={() => { setShowFilterMenu(!showFilterMenu); setShowSortMenu(false); }}
+                    title="Filter" aria-label="Filter habits"
                     aria-label="Filter habits" title="Filter habits"
                     className={cn("p-2 rounded-md transition-colors", t.iconBtn, filterConfig ? t.pill : t.subtext)}>
                     <Filter className="w-4 h-4" />
@@ -355,6 +356,7 @@ export const Component = () => {
                 {/* Sort */}
                 <div className="relative" ref={sortRef}>
                   <button onClick={() => { setShowSortMenu(!showSortMenu); setShowFilterMenu(false); }}
+                    title="Sort" aria-label="Sort habits"
                     aria-label="Sort habits" title="Sort habits"
                     className={cn("p-2 rounded-md transition-colors", t.iconBtn, sortConfig ? t.pill : t.subtext)}>
                     <ArrowUpDown className="w-4 h-4" />
@@ -375,6 +377,7 @@ export const Component = () => {
                 </div>
 
                 {/* Zap: toggle all */}
+                <button onClick={handleToggleAll} title="Toggle all habits" aria-label="Toggle all habits"
                 <button onClick={handleToggleAll} aria-label="Toggle all habits" title="Toggle all habits"
                   className={cn("p-2 rounded-md transition-colors", t.iconBtn, t.subtext)}>
                   <Zap className="w-4 h-4" />
@@ -382,6 +385,7 @@ export const Component = () => {
 
                 {/* Search */}
                 <button onClick={() => { setShowSearch(!showSearch); if (showSearch) setSearchQuery(""); }}
+                  title="Search" aria-label="Search days"
                   aria-label="Search habits" title="Search habits"
                   className={cn("p-2 rounded-md transition-colors", t.iconBtn, showSearch ? t.pill : t.subtext)}>
                   <Search className="w-4 h-4" />
@@ -389,6 +393,7 @@ export const Component = () => {
 
                 {/* Settings */}
                 <button onClick={() => setShowSettingsModal(true)}
+                  title="Settings" aria-label="Settings"
                   aria-label="Settings" title="Settings"
                   className={cn("p-2 rounded-md transition-colors", t.iconBtn, t.subtext)}>
                   <Settings className="w-4 h-4" />
@@ -396,6 +401,7 @@ export const Component = () => {
 
                 {/* Theme */}
                 <button onClick={() => setDark(!dark)}
+                  title="Toggle theme" aria-label="Toggle theme"
                   aria-label="Toggle theme" title="Toggle theme"
                   className={cn("p-2 rounded-md border transition-all duration-200", t.toggleBg, t.border)}>
                   {dark ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className={cn("w-4 h-4", t.subtext)} />}
