@@ -1,4 +1,3 @@
-npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
 import { Component } from "@/components/ui/job-application-tracker-notion-style";
 
 export default function DemoOne() {
