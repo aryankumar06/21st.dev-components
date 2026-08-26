@@ -72,7 +72,7 @@ const NotionCheckbox = ({ checked, onToggle, dark }) => (
     onClick={onToggle}
     aria-label={checked ? "Uncheck" : "Check"}
     className={cn(
-      "w-[18px] h-[18px] rounded-[4px] border flex items-center justify-center transition-all duration-150 flex-shrink-0",
+      "w-[18px] h-[18px] rounded-[4px] border flex items-center justify-center transition-all duration-150 flex-shrink-0 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-[#2f6fed]",
       dark
         ? checked ? "bg-[#2f6fed] border-[#2f6fed]" : "bg-transparent border-[#5a5a5a] hover:bg-[#232323]"
         : checked ? "bg-[#2f6fed] border-[#2f6fed]" : "bg-transparent border-[#c0c0c0] hover:bg-[#f0f0f0]"
@@ -93,7 +93,7 @@ const Modal = ({ title, onClose, dark, children }) => {
       <div className={cn("w-full max-w-md rounded-xl border shadow-2xl", modal)}>
         <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: divCol }}>
           <h2 className={cn("font-semibold text-base", titleCls)}>{title}</h2>
-          <button onClick={onClose} className={cn("p-1.5 rounded-md transition-colors", closeCls)}>
+          <button onClick={onClose} aria-label="Close" title="Close" className={cn("p-1.5 rounded-md transition-colors", closeCls)}>
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -260,7 +260,7 @@ export const Component = () => {
     header: "bg-[#171717]", rowHover: "hover:bg-[#1a1a1a]",
     text: "text-white", subtext: "text-gray-400", muted: "text-gray-500",
     tag: "bg-[#1d1d1d]", tagText: "text-gray-300",
-    iconBtn: "hover:bg-[#1d1d1d]", newBtn: "bg-[#2f6fed] hover:bg-[#275fe0]",
+    iconBtn: "hover:bg-[#1d1d1d] focus-visible:ring-2 focus-visible:outline-none focus-visible:opacity-100", newBtn: "bg-[#2f6fed] hover:bg-[#275fe0]",
     dayText: "text-[#e6e6e6]", progressBg: "bg-[#2a2a2a]", progressFill: "bg-[#2f6fed]",
     cellBorder: "border-[#2a2a2a]", toggleBg: "bg-[#1d1d1d] hover:bg-[#2a2a2a] border-[#3a3a3a]",
     input: "bg-[#111] border-[#333] text-white placeholder-gray-600 focus:border-[#2f6fed]",
@@ -273,7 +273,7 @@ export const Component = () => {
     header: "bg-[#fafafa]", rowHover: "hover:bg-[#f9f9f9]",
     text: "text-[#1a1a1a]", subtext: "text-[#6b6b6b]", muted: "text-[#aaaaaa]",
     tag: "bg-[#f0f0ee]", tagText: "text-[#555]",
-    iconBtn: "hover:bg-[#f0f0f0]", newBtn: "bg-[#2f6fed] hover:bg-[#275fe0]",
+    iconBtn: "hover:bg-[#f0f0f0] focus-visible:ring-2 focus-visible:outline-none focus-visible:opacity-100", newBtn: "bg-[#2f6fed] hover:bg-[#275fe0]",
     dayText: "text-[#2a2a2a]", progressBg: "bg-[#e8e8e8]", progressFill: "bg-[#2f6fed]",
     cellBorder: "border-[#e8e8e8]", toggleBg: "bg-[#f0f0ee] hover:bg-[#e8e8e6] border-[#e0e0e0]",
     input: "bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-[#2f6fed]",
@@ -443,6 +443,7 @@ export const Component = () => {
                         <span className="whitespace-nowrap">{col.label}</span>
                         <button
                           onClick={(e) => { e.stopPropagation(); setColMenuKey(colMenuKey === col.key ? null : col.key); }}
+                          aria-label="Column menu" title="Column menu"
                           className={cn("ml-1 opacity-0 group-hover:opacity-100 p-0.5 rounded transition-all", t.iconBtn)}
                         >
                           <ChevronDown className="w-3 h-3" />
@@ -492,7 +493,7 @@ export const Component = () => {
                       ))}
                       {/* Check-all cell */}
                       <td className={cn("px-4 py-3.5 border-r text-center", t.cellBorder)}>
-                        <button onClick={() => handleCheckAllForDay(row.day)} title="Check all for this day"
+                        <button onClick={() => handleCheckAllForDay(row.day)} aria-label="Check all for this day" title="Check all for this day"
                           className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}>
                           <Check className="w-3.5 h-3.5" />
                         </button>
@@ -502,6 +503,7 @@ export const Component = () => {
                         <div className="relative inline-block">
                           <button
                             onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
+                            aria-label="Row menu" title="Row menu"
                             className={cn("opacity-0 group-hover:opacity-100 p-1 rounded transition-all", t.iconBtn, t.muted)}
                           >
                             <MoreHorizontal className="w-3.5 h-3.5" />
@@ -594,6 +596,7 @@ export const Component = () => {
                   <div className="w-8 flex justify-center relative">
                     <button
                       onClick={(e) => { e.stopPropagation(); setRowMenu(rowMenu?.day === row.day ? null : { day: row.day }); }}
+                      aria-label="Row menu" title="Row menu"
                       className={cn("p-1 rounded transition-colors", t.iconBtn, t.muted)}
                     >
                       <MoreHorizontal className="w-4 h-4" />
