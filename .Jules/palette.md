@@ -5,3 +5,7 @@
 ## 2026-08-09 - Empty States for Filtered Views
 **Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
 **Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
+
+## 2024-05-18 - Keyboard Accessibility & Hover Elements
+**Learning:** Elements hidden via `opacity-0 group-hover:opacity-100` are technically focusable but visually hidden during keyboard navigation, creating keyboard accessibility traps where focus disappears.
+**Action:** Always add `focus-visible:opacity-100` alongside hover opacity utilities to ensure keyboard users can see where they are navigating. Provide ARIA labels when making these elements visible isn't enough context for screen readers.
