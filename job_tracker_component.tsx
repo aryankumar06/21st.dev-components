@@ -785,8 +785,28 @@ export const Component = () => {
                 <span>Actions</span>
               </div>
               {filteredApps.length === 0 && (
-                <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14 }}>
+                <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
                   No applications match your search
+                  {(searchQuery || filterStage !== "all") && (
+                    <button
+                      onClick={() => {
+                        setSearchQuery("");
+                        setFilterStage("all");
+                      }}
+                      style={{
+                        background: t.surfaceAlt,
+                        border: `1px solid ${t.border}`,
+                        color: t.text,
+                        padding: "6px 12px",
+                        borderRadius: 6,
+                        fontSize: 13,
+                        fontWeight: 500,
+                        cursor: "pointer",
+                      }}
+                    >
+                      Clear search/filters
+                    </button>
+                  )}
                 </div>
               )}
               {filteredApps.map((app, i) => {
