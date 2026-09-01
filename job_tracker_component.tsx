@@ -339,6 +339,8 @@ export const Component = () => {
               ? <span style={{ color: t.text, display: "flex", alignItems: "center", gap: 8 }}>
                   <span>📄</span> {resumeFile}
                   <button
+                    aria-label="Remove resume file"
+                    title="Remove resume file"
                     onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
                   >
@@ -405,6 +407,7 @@ export const Component = () => {
               {/* Filter */}
               <div style={{ position: "relative" }} ref={filterMenuRef}>
                 <button
+                  aria-label="Filter by stage"
                   title="Filter by stage"
                   onClick={() => setShowFilterMenu((v) => !v)}
                   style={iconBtn(filterStage !== "all" || showFilterMenu)}
@@ -449,6 +452,7 @@ export const Component = () => {
               {/* Sort */}
               <div style={{ position: "relative" }} ref={sortMenuRef}>
                 <button
+                  aria-label="Sort by"
                   title="Sort"
                   onClick={() => setShowSortMenu((v) => !v)}
                   style={iconBtn(sortField !== "none" || showSortMenu)}
@@ -506,6 +510,7 @@ export const Component = () => {
 
               {/* Search */}
               <button
+                aria-label="Search applications"
                 title="Search"
                 onClick={() => { setShowSearch((v) => !v); setTimeout(() => searchRef.current?.focus(), 50); }}
                 style={iconBtn(showSearch)}
@@ -517,6 +522,7 @@ export const Component = () => {
 
               {/* Expand */}
               <button
+                aria-label={isExpanded ? "Collapse tracker" : "Expand tracker"}
                 title={isExpanded ? "Collapse" : "Expand"}
                 onClick={() => setIsExpanded((v) => !v)}
                 style={iconBtn(isExpanded)}
@@ -531,6 +537,7 @@ export const Component = () => {
 
               {/* Settings */}
               <button
+                aria-label="Settings"
                 title="Settings"
                 onClick={() => setShowSettings(true)}
                 style={iconBtn(showSettings)}
@@ -933,7 +940,7 @@ export const Component = () => {
                   <div style={{ fontSize: 13, color: t.muted }}>{selectedApp.role}</div>
                 </div>
               </div>
-              <button onClick={() => setSelectedApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}>
+              <button aria-label="Close details" title="Close details" onClick={() => setSelectedApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}>
                 <XIcon />
               </button>
             </div>
