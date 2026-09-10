@@ -786,7 +786,26 @@ export const Component = () => {
               </div>
               {filteredApps.length === 0 && (
                 <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14 }}>
-                  No applications match your search
+                  <div style={{ marginBottom: (searchQuery || filterStage !== "all" || sortField !== "none") ? 12 : 0 }}>
+                    No applications match your search
+                  </div>
+                  {(searchQuery || filterStage !== "all" || sortField !== "none") && (
+                    <button
+                      onClick={() => {
+                        setSearchQuery("");
+                        setFilterStage("all");
+                        clearSort();
+                      }}
+                      style={{
+                        background: isDark ? "#1e3a5f" : "#dbeafe",
+                        color: isDark ? "#93c5fd" : "#1d4ed8",
+                        border: "none", borderRadius: 6, padding: "6px 12px",
+                        fontSize: 13, cursor: "pointer", fontFamily: "inherit", fontWeight: 500
+                      }}
+                    >
+                      Clear filters/search
+                    </button>
+                  )}
                 </div>
               )}
               {filteredApps.map((app, i) => {
