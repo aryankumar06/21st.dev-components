@@ -1,4 +1,3 @@
-npx shadcn@latest add https://21st.dev/r/aryankumar06/job-application-tracker-notion-style
 import { Component } from "@/components/ui/job-application-tracker-notion-style";
 
 export default function DemoOne() {
@@ -785,8 +784,23 @@ export const Component = () => {
                 <span>Actions</span>
               </div>
               {filteredApps.length === 0 && (
-                <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14 }}>
-                  No applications match your search
+                <div style={{ padding: "32px 16px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                  <span style={{ color: t.muted, fontSize: 14 }}>No applications match your search</span>
+                  {(searchQuery || filterStage !== "all") && (
+                    <button
+                      onClick={() => { setSearchQuery(""); setFilterStage("all"); }}
+                      style={{
+                        background: "transparent", color: t.text, border: `1px solid ${t.border}`,
+                        borderRadius: 6, padding: "6px 14px", fontSize: 13,
+                        fontFamily: "inherit", fontWeight: 500, cursor: "pointer",
+                        transition: "background 0.2s"
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = t.surfaceHover)}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                    >
+                      Clear filters/search
+                    </button>
+                  )}
                 </div>
               )}
               {filteredApps.map((app, i) => {
