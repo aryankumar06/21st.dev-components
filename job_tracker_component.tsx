@@ -319,12 +319,22 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.target !== e.currentTarget) return;
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.currentTarget.querySelector("input")?.click();
+              }
+            }}
+            onFocus={(e) => (e.currentTarget.style.boxShadow = "0 0 0 2px #3b82f6")}
+            onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
               borderRadius: 8, padding: "16px 20px",
               fontSize: 14, color: t.muted, cursor: "pointer",
-              transition: "border-color 0.2s",
+              transition: "border-color 0.2s, box-shadow 0.2s",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = t.border)}
@@ -341,6 +351,8 @@ export const Component = () => {
                   <button
                     onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
+                    aria-label="Remove resume"
+                    title="Remove resume"
                   >
                     <XIcon size={12} />
                   </button>
@@ -785,8 +797,18 @@ export const Component = () => {
                 <span>Actions</span>
               </div>
               {filteredApps.length === 0 && (
-                <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14 }}>
-                  No applications match your search
+                <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                  <span>No applications match your search or filter</span>
+                  {(searchQuery || filterStage !== "all") && (
+                    <button
+                      onClick={() => { setSearchQuery(""); setFilterStage("all"); }}
+                      style={{ background: t.surfaceAlt, color: t.text, border: `1px solid ${t.border}`, borderRadius: 6, padding: "6px 12px", fontSize: 13, cursor: "pointer", fontFamily: "inherit", transition: "background 0.2s" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = t.surfaceHover)}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = t.surfaceAlt)}
+                    >
+                      Clear filters/search
+                    </button>
+                  )}
                 </div>
               )}
               {filteredApps.map((app, i) => {
