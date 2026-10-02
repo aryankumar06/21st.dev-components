@@ -66,13 +66,13 @@ const DropdownMenu = ({ items, onClose, dark, className = "" }) => {
   );
 };
 
-const NotionCheckbox = ({ checked, onToggle, dark }) => (
+const NotionCheckbox = ({ checked, onToggle, dark, ariaLabel }) => (
   <button
     type="button"
     onClick={onToggle}
-    aria-label={checked ? "Uncheck" : "Check"}
+    aria-label={ariaLabel || (checked ? "Uncheck" : "Check")}
     className={cn(
-      "w-[18px] h-[18px] rounded-[4px] border flex items-center justify-center transition-all duration-150 flex-shrink-0",
+      "w-[18px] h-[18px] rounded-[4px] border flex items-center justify-center transition-all duration-150 flex-shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2f6fed]",
       dark
         ? checked ? "bg-[#2f6fed] border-[#2f6fed]" : "bg-transparent border-[#5a5a5a] hover:bg-[#232323]"
         : checked ? "bg-[#2f6fed] border-[#2f6fed]" : "bg-transparent border-[#c0c0c0] hover:bg-[#f0f0f0]"
@@ -489,7 +489,7 @@ export const Component = () => {
                       </td>
                       {visibleCols.map((col) => (
                         <td key={col.key} className={cn("px-5 py-3.5 border-r", t.cellBorder)}>
-                          <NotionCheckbox checked={row[col.key]} onToggle={() => toggleHabit(originalIndex, col.key)} dark={dark} />
+                          <NotionCheckbox checked={row[col.key]} onToggle={() => toggleHabit(originalIndex, col.key)} dark={dark} ariaLabel={`${row[col.key] ? "Uncheck" : "Check"} ${col.label} for ${row.day}`} />
                         </td>
                       ))}
                       {/* Check-all cell */}
@@ -592,7 +592,7 @@ export const Component = () => {
                   </div>
                   {visibleCols.map((col) => (
                     <div key={col.key} className="flex-1 flex justify-center">
-                      <NotionCheckbox checked={row[col.key]} onToggle={() => toggleHabit(originalIndex, col.key)} dark={dark} />
+                      <NotionCheckbox checked={row[col.key]} onToggle={() => toggleHabit(originalIndex, col.key)} dark={dark} ariaLabel={`${row[col.key] ? "Uncheck" : "Check"} ${col.label} for ${row.day}`} />
                     </div>
                   ))}
                   <div className="w-8 flex justify-center relative">

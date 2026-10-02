@@ -5,3 +5,7 @@
 ## 2026-08-09 - Empty States for Filtered Views
 **Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
 **Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
+
+## 2024-10-02 - Improve Grid Checkbox Accessibility
+**Learning:** Using generic `aria-label="Check"` on toggle buttons inside dense data grids (like a habit tracker) leaves screen reader users without crucial context (e.g., which habit and which day they are toggling). Furthermore, interactive elements often lack default focus rings in Tailwind without explicit `focus-visible` styles, making keyboard navigation difficult.
+**Action:** Always provide context-rich `aria-label` attributes (e.g., "Check Workout for Monday") for grid-based toggles and ensure they include `focus-visible` outline styles for keyboard accessibility.
