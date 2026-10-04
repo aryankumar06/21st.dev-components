@@ -866,18 +866,29 @@ export const Component = () => {
                   transition: "color 0.2s",
                 }}
               >
-                <div
+                <button
+                  type="button"
+                  role="checkbox"
+                  aria-checked={item.done}
+                  aria-label={`Toggle action item: ${item.text}`}
                   onClick={() => toggleAction(item.id)}
                   style={{
                     width: 18, height: 18, borderRadius: 4, flexShrink: 0,
                     cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
                     background: item.done ? "#3b82f6" : "transparent",
                     border: `1.5px solid ${item.done ? "#3b82f6" : t.border}`,
-                    transition: "all 0.15s",
+                    transition: "all 0.15s, box-shadow 0.2s",
+                    outline: "none",
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 0 2px rgba(59, 130, 246, 0.5)";
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.boxShadow = "none";
                   }}
                 >
                   {item.done && <CheckIcon />}
-                </div>
+                </button>
                 <span style={{ flex: 1, textDecoration: item.done ? "line-through" : "none" }}>{item.text}</span>
                 <button
                   onClick={() => deleteAction(item.id)}
