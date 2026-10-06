@@ -319,15 +319,34 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.currentTarget.click();
+              }
+            }}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
               borderRadius: 8, padding: "16px 20px",
               fontSize: 14, color: t.muted, cursor: "pointer",
-              transition: "border-color 0.2s",
+              transition: "border-color 0.2s, box-shadow 0.2s",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
-            onMouseLeave={(e) => (e.currentTarget.style.borderColor = t.border)}
+            onMouseLeave={(e) => {
+              if (document.activeElement !== e.currentTarget) {
+                e.currentTarget.style.borderColor = t.border;
+              }
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = "#3b82f6";
+              e.currentTarget.style.boxShadow = "0 0 0 2px rgba(59, 130, 246, 0.5)";
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = t.border;
+              e.currentTarget.style.boxShadow = "none";
+            }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -866,7 +885,11 @@ export const Component = () => {
                   transition: "color 0.2s",
                 }}
               >
-                <div
+                <button
+                  type="button"
+                  role="checkbox"
+                  aria-checked={item.done}
+                  aria-label={`Mark "${item.text}" as ${item.done ? "incomplete" : "complete"}`}
                   onClick={() => toggleAction(item.id)}
                   style={{
                     width: 18, height: 18, borderRadius: 4, flexShrink: 0,
@@ -874,10 +897,11 @@ export const Component = () => {
                     background: item.done ? "#3b82f6" : "transparent",
                     border: `1.5px solid ${item.done ? "#3b82f6" : t.border}`,
                     transition: "all 0.15s",
+                    padding: 0,
                   }}
                 >
                   {item.done && <CheckIcon />}
-                </div>
+                </button>
                 <span style={{ flex: 1, textDecoration: item.done ? "line-through" : "none" }}>{item.text}</span>
                 <button
                   onClick={() => deleteAction(item.id)}
@@ -1121,12 +1145,17 @@ export const Component = () => {
                   <div style={{ fontSize: 14, fontWeight: 500 }}>{label}</div>
                   <div style={{ fontSize: 12, color: t.muted, marginTop: 2 }}>{desc}</div>
                 </div>
-                <div
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={value}
+                  aria-label={label}
                   onClick={() => set(!value)}
                   style={{
                     width: 42, height: 24, borderRadius: 12, cursor: "pointer",
                     background: value ? "#3b82f6" : t.border,
                     position: "relative", transition: "background 0.2s", flexShrink: 0,
+                    border: "none", padding: 0,
                   }}
                 >
                   <div style={{
@@ -1135,7 +1164,7 @@ export const Component = () => {
                     background: "#fff", transition: "left 0.2s",
                     boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
                   }} />
-                </div>
+                </button>
               </div>
             ))}
 
