@@ -5,3 +5,7 @@
 ## 2026-08-09 - Empty States for Filtered Views
 **Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
 **Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
+
+## YYYY-MM-DD - Refactoring non-semantic elements for keyboard accessibility
+**Learning:** Custom interactive elements (like Action Item checkboxes built with `<div>`) and file upload wrappers (built with `<label>`) are completely inaccessible to keyboard users by default, preventing them from navigating to or activating these core features.
+**Action:** Always replace non-semantic interactive `<div>` elements with native `<button type="button">` (adding appropriate `role` and `aria-` attributes), and make hidden file input wrappers accessible by adding `tabIndex={0}`, an `onKeyDown` handler to trigger clicks on Enter/Space, and explicit `onFocus`/`onBlur` visual styles.
