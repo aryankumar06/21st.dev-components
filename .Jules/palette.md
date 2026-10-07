@@ -5,3 +5,6 @@
 ## 2026-08-09 - Empty States for Filtered Views
 **Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
 **Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
+## 2024-05-18 - Accessible Toggles
+**Learning:** Implementing custom checkboxes or switches with `<div onClick>` breaks keyboard focus and screen reader support.
+**Action:** Convert non-semantic interactive elements to `<button type="button">` with appropriate `role`, `aria-checked`, and `aria-label`.

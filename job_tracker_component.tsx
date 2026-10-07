@@ -866,7 +866,11 @@ export const Component = () => {
                   transition: "color 0.2s",
                 }}
               >
-                <div
+                <button
+                  type="button"
+                  role="checkbox"
+                  aria-checked={item.done}
+                  aria-label={`Mark "${item.text}" as ${item.done ? "incomplete" : "complete"}`}
                   onClick={() => toggleAction(item.id)}
                   style={{
                     width: 18, height: 18, borderRadius: 4, flexShrink: 0,
@@ -874,16 +878,20 @@ export const Component = () => {
                     background: item.done ? "#3b82f6" : "transparent",
                     border: `1.5px solid ${item.done ? "#3b82f6" : t.border}`,
                     transition: "all 0.15s",
+                    padding: 0,
                   }}
                 >
                   {item.done && <CheckIcon />}
-                </div>
+                </button>
                 <span style={{ flex: 1, textDecoration: item.done ? "line-through" : "none" }}>{item.text}</span>
                 <button
                   onClick={() => deleteAction(item.id)}
+                  aria-label={`Delete action item "${item.text}"`}
                   style={{ background: "none", border: "none", cursor: "pointer", color: t.subtle, padding: 4, display: "flex", alignItems: "center", borderRadius: 4, transition: "color 0.15s" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#ef4444")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = t.subtle)}
+                  onMouseLeave={(e) => { if (document.activeElement !== e.currentTarget) e.currentTarget.style.color = t.subtle; }}
+                  onFocus={(e) => (e.currentTarget.style.color = "#ef4444")}
+                  onBlur={(e) => (e.currentTarget.style.color = t.subtle)}
                   title="Delete"
                 >
                   <XIcon size={13} />
@@ -1121,12 +1129,17 @@ export const Component = () => {
                   <div style={{ fontSize: 14, fontWeight: 500 }}>{label}</div>
                   <div style={{ fontSize: 12, color: t.muted, marginTop: 2 }}>{desc}</div>
                 </div>
-                <div
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={value}
+                  aria-label={label}
                   onClick={() => set(!value)}
                   style={{
                     width: 42, height: 24, borderRadius: 12, cursor: "pointer",
                     background: value ? "#3b82f6" : t.border,
                     position: "relative", transition: "background 0.2s", flexShrink: 0,
+                    border: "none", padding: 0,
                   }}
                 >
                   <div style={{
@@ -1135,7 +1148,7 @@ export const Component = () => {
                     background: "#fff", transition: "left 0.2s",
                     boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
                   }} />
-                </div>
+                </button>
               </div>
             ))}
 
