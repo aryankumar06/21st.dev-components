@@ -5,3 +5,7 @@
 ## 2026-08-09 - Empty States for Filtered Views
 **Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
 **Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
+
+## 2024-10-10 - Add aria-labels and titles to icon-only buttons
+**Learning:** Icon-only buttons (like "X" buttons to clear or close modals, and search clear buttons) require both `aria-label` for screen reader accessibility and `title` for visual tooltips to provide adequate context for users.
+**Action:** Ensure all icon-only buttons clearly define their intent using both `aria-label` and `title` attributes across the application.

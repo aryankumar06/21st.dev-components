@@ -341,6 +341,8 @@ export const Component = () => {
                   <button
                     onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
+                    aria-label="Remove file"
+                    title="Remove file"
                   >
                     <XIcon size={12} />
                   </button>
@@ -621,6 +623,8 @@ export const Component = () => {
                 <button
                   onClick={() => setSearchQuery("")}
                   style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: t.muted }}
+                  aria-label="Clear search"
+                  title="Clear search"
                 >
                   <XIcon size={13} />
                 </button>
@@ -638,7 +642,7 @@ export const Component = () => {
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
                   Stage: {STAGES.find((s) => s.key === filterStage)?.label}
-                  <button onClick={() => setFilterStage("all")} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
+                  <button aria-label="Clear stage filter" title="Clear stage filter" onClick={() => setFilterStage("all")} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
                 </span>
               )}
               {sortField !== "none" && (
@@ -648,7 +652,7 @@ export const Component = () => {
                   display: "flex", alignItems: "center", gap: 6,
                 }}>
                   Sort: {sortField} {sortDir === "asc" ? "↑" : "↓"}
-                  <button onClick={clearSort} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
+                  <button aria-label="Clear sort" title="Clear sort" onClick={clearSort} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, lineHeight: 1 }}>×</button>
                 </span>
               )}
             </div>
@@ -884,7 +888,8 @@ export const Component = () => {
                   style={{ background: "none", border: "none", cursor: "pointer", color: t.subtle, padding: 4, display: "flex", alignItems: "center", borderRadius: 4, transition: "color 0.15s" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#ef4444")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = t.subtle)}
-                  title="Delete"
+                  aria-label="Delete action item"
+                  title="Delete action item"
                 >
                   <XIcon size={13} />
                 </button>
@@ -933,7 +938,7 @@ export const Component = () => {
                   <div style={{ fontSize: 13, color: t.muted }}>{selectedApp.role}</div>
                 </div>
               </div>
-              <button onClick={() => setSelectedApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}>
+              <button onClick={() => setSelectedApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }} aria-label="Close details" title="Close details">
                 <XIcon />
               </button>
             </div>
@@ -1029,7 +1034,7 @@ export const Component = () => {
           <div style={{ padding: "20px 24px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
               <div style={{ fontWeight: 700, fontSize: 17 }}>Edit Application</div>
-              <button onClick={() => setEditApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
+              <button onClick={() => setEditApp(null)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }} aria-label="Close edit application" title="Close edit application"><XIcon /></button>
             </div>
 
             <div style={{ marginBottom: 14 }}>
@@ -1109,7 +1114,7 @@ export const Component = () => {
           <div style={{ padding: "20px 24px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
               <div style={{ fontWeight: 700, fontSize: 17 }}>Settings</div>
-              <button onClick={() => setShowSettings(false)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }}><XIcon /></button>
+              <button onClick={() => setShowSettings(false)} style={{ background: "none", border: "none", cursor: "pointer", color: t.muted }} aria-label="Close settings" title="Close settings"><XIcon /></button>
             </div>
 
             {[
