@@ -787,6 +787,16 @@ export const Component = () => {
               {filteredApps.length === 0 && (
                 <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14 }}>
                   No applications match your search
+                  {(searchQuery || filterStage !== "all") && (
+                    <div style={{ marginTop: 12 }}>
+                      <button
+                        onClick={() => { setSearchQuery(""); setFilterStage("all"); }}
+                        style={{ padding: "6px 12px", background: t.surfaceAlt, color: t.text, border: `1px solid ${t.border}`, borderRadius: 6, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}
+                      >
+                        Clear filters/search
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
               {filteredApps.map((app, i) => {
