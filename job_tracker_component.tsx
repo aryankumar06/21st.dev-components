@@ -143,6 +143,7 @@ export const Component = () => {
   const [newActionText, setNewActionText] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
   const [resumeFile, setResumeFile] = useState<string | null>(null);
+  const [isResumeFocused, setIsResumeFocused] = useState(false);
   const [dragId, setDragId] = useState<number | null>(null);
   const [dragOverStage, setDragOverStage] = useState<Stage | null>(null);
   const [autoSort, setAutoSort] = useState(false);
@@ -319,12 +320,22 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
+            onFocus={() => setIsResumeFocused(true)}
+            onBlur={() => setIsResumeFocused(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                if (e.target === e.currentTarget) e.currentTarget.click();
+              }
+            }}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
               borderRadius: 8, padding: "16px 20px",
               fontSize: 14, color: t.muted, cursor: "pointer",
-              transition: "border-color 0.2s",
+              transition: "border-color 0.2s, box-shadow 0.2s",
+              boxShadow: isResumeFocused ? "0 0 0 2px #3b82f6" : "none",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = t.border)}
