@@ -147,6 +147,8 @@ export const Component = () => {
   const [dragOverStage, setDragOverStage] = useState<Stage | null>(null);
   const [autoSort, setAutoSort] = useState(false);
   const [compactView, setCompactView] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isFileFocused, setIsFileFocused] = useState(false);
 
   const sortMenuRef = useRef<HTMLDivElement>(null!);
   const filterMenuRef = useRef<HTMLDivElement>(null!);
@@ -319,12 +321,23 @@ export const Component = () => {
             ↓ Upload your resume by clicking the block below and choosing a file from your computer
           </p>
           <label
+            tabIndex={0}
+            onFocus={() => setIsFileFocused(true)}
+            onBlur={() => setIsFileFocused(false)}
+            onKeyDown={(e) => {
+              if (e.target !== e.currentTarget) return;
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                fileInputRef.current?.click();
+              }
+            }}
             style={{
               display: "flex", alignItems: "center", gap: 12,
               background: t.surfaceAlt, border: `1px solid ${t.border}`,
               borderRadius: 8, padding: "16px 20px",
               fontSize: 14, color: t.muted, cursor: "pointer",
-              transition: "border-color 0.2s",
+              transition: "border-color 0.2s, box-shadow 0.2s",
+              boxShadow: isFileFocused ? "0 0 0 2px #3b82f6" : "none",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = t.border)}
@@ -341,6 +354,8 @@ export const Component = () => {
                   <button
                     onClick={(e) => { e.preventDefault(); setResumeFile(null); }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: t.muted, padding: 2 }}
+                    aria-label="Remove resume"
+                    title="Remove resume"
                   >
                     <XIcon size={12} />
                   </button>
@@ -348,6 +363,7 @@ export const Component = () => {
               : "Upload or embed a file"
             }
             <input
+              ref={fileInputRef}
               type="file"
               style={{ display: "none" }}
               accept=".pdf,.doc,.docx"
