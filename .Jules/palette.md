@@ -5,3 +5,7 @@
 ## 2026-08-09 - Empty States for Filtered Views
 **Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
 **Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
+
+## 2024-05-25 - File Upload Wrapper Accessibility
+**Learning:** When hiding standard file inputs (`display: none`) behind custom wrapper elements like `<label>`, standard keyboard navigation is lost. To ensure screen-reader and keyboard accessibility, the wrapper must be made focusable (`tabIndex={0}`), handle Enter/Space events to trigger the hidden input, manage event bubbling for nested interactions (like a remove button), and explicitly show visible focus states (e.g., using `box-shadow` on focus).
+**Action:** Always add explicit keyboard event handlers (`onKeyDown`), focus states (`onFocus`/`onBlur`), and proper event bubbling checks (`e.target !== e.currentTarget`) when creating custom UI wrappers for native interactive elements like file inputs.
