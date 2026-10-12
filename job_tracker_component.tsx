@@ -684,6 +684,22 @@ export const Component = () => {
                     </span>
                   </div>
 
+                  {stageApps(stage.key).length === 0 && !addingToStage && (
+                    <div style={{ textAlign: "center", padding: "20px 0", color: t.muted, fontSize: 13 }}>
+                      No applications
+                      {(searchQuery || filterStage !== "all") && (
+                        <div style={{ marginTop: 8 }}>
+                          <button
+                            onClick={() => { setSearchQuery(""); setFilterStage("all"); }}
+                            style={{ background: t.surfaceAlt, border: `1px solid ${t.border}`, borderRadius: 6, padding: "6px 12px", color: t.text, cursor: "pointer", fontSize: 12 }}
+                          >
+                            Clear filters/search
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   {stageApps(stage.key).map((app) => (
                     <div
                       key={app.id}
@@ -785,8 +801,16 @@ export const Component = () => {
                 <span>Actions</span>
               </div>
               {filteredApps.length === 0 && (
-                <div style={{ padding: "24px 16px", textAlign: "center", color: t.muted, fontSize: 14 }}>
-                  No applications match your search
+                <div style={{ padding: "40px 16px", textAlign: "center", color: t.muted, fontSize: 14 }}>
+                  <div style={{ marginBottom: 12 }}>No applications match your search or filters</div>
+                  {(searchQuery || filterStage !== "all") && (
+                    <button
+                      onClick={() => { setSearchQuery(""); setFilterStage("all"); }}
+                      style={{ background: t.surfaceAlt, border: `1px solid ${t.border}`, borderRadius: 6, padding: "8px 16px", color: t.text, cursor: "pointer", fontSize: 13 }}
+                    >
+                      Clear filters/search
+                    </button>
+                  )}
                 </div>
               )}
               {filteredApps.map((app, i) => {
