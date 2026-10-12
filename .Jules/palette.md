@@ -5,3 +5,7 @@
 ## 2026-08-09 - Empty States for Filtered Views
 **Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
 **Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
+
+## 2026-08-09 - Disabled Button States
+**Learning:** When disabling buttons, lack of visual indicators or explanations causes user confusion as they do not know why an action is blocked. This is a common accessibility/usability gap in forms (like the Add Column/Row modals).
+**Action:** Always ensure disabled buttons have clear visual indicators (e.g., `disabled:opacity-50 disabled:cursor-not-allowed`) and provide explanatory dynamic tooltips (`title` attributes) indicating why they are disabled.
