@@ -5,3 +5,6 @@
 ## 2026-08-09 - Empty States for Filtered Views
 **Learning:** When implementing empty states for data-heavy components triggered by active filters or search queries, always include an actionable 'Clear filters/search' button to speed up user recovery and prevent dead-ends.
 **Action:** Always include a 'Clear filters/search' button when an empty state is caused by active filters or search.
+## 2024-10-24 - Keyboard Accessibility for Hidden File Inputs
+**Learning:** When hiding a `<input type="file">` element (using `display: none`) and replacing it with a custom `<label>` for styling, the input loses its default keyboard actionability (focus via Tab and selection via Enter/Space). Sighted keyboard users and screen reader users cannot interact with the upload area.
+**Action:** Always make the wrapper `<label>` keyboard accessible by adding `tabIndex={0}`, visible focus styles (e.g., via `onFocus`/`onBlur` modifying an outline or box-shadow), and an `onKeyDown` handler to trigger the click event on Enter or Space keys, ensuring you handle event bubbling properly.
